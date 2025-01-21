@@ -1,6 +1,6 @@
 import { View, Image, Text, StyleSheet } from 'react-native'
 import React from 'react'
-
+w
 export function SwipeableImage({ user }) {
   console.log(user.picture.large)
   return (

@@ -6,6 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
+      
       <LinearGradient
         // Background Linear Gradient
         colors={['#004771', '#CC0000']}
