@@ -2,16 +2,19 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import  MainEvents from './screens/Events/MainEvents'
 import { LinearGradient } from 'expo-linear-gradient';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        // Background Linear Gradient
         colors={['#004771', '#CC0000']}
         style={styles.background}
       />
+      <GestureHandlerRootView>
+
       <MainEvents/>
+      </GestureHandlerRootView>
       <StatusBar style="auto" />
     </SafeAreaView>
   );

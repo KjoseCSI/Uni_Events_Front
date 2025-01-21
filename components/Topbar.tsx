@@ -6,6 +6,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 export function Topbar() {
   return (
     <SafeAreaView style={styles.container}>
+      <View/>
       <Text style={styles.text } >UNI EVENTS</Text>
       <TouchableOpacity style={styles.icon}>
         <AntDesign name="user" size={24} color="white" />
@@ -22,14 +23,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: 15,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.12,
-    shadowRadius: 5.46,
-    elevation: 9,
+
   },
   icon:{
     width: 50,

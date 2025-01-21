@@ -3,9 +3,10 @@ import React, { Component, useEffect, useRef, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Topbar } from '../../components/Topbar'
 import Searchinput from '../../components/Searchinput'
-import ButtonBar from '../../components/ButtonBar'
+import BottonBar from '../../components/BottonBar'
 import { SwipeableImage } from "../../components/SwipeableImage";
 import  {useFetchUsers}  from "../../services/RandomUserAPI"
+import { Swipes } from '../../components/Swipes'
 
 
 export default function MainEvents() {
@@ -20,10 +21,11 @@ export default function MainEvents() {
       <View style={styles.swipes}>
         {
         users.length > 1 && 
-          <SwipeableImage user={users[currentIndex]}/>
+        <Swipes users={users} currentIndex={currentIndex} />
         }
       </View>
-      <ButtonBar/>
+      
+      <BottonBar/>
     </SafeAreaView>
   )
 }
