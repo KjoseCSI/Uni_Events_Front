@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import  MainEvents from './screens/Events/MainEvents';
+import { SafeAreaView } from 'react-native';
+{/*{import  MainEvents from './screens/Events/MainEvents'; */}
 import { LinearGradient } from 'expo-linear-gradient';
 import FormPage from './screens/Events/FormPage';
 import styles from './components/style';

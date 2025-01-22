@@ -5,7 +5,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import React from 'react'
 
 
-export default function ButtonBar() {
+export default function BottonBar() {
     return (
         <SafeAreaView style={styles.container}>
             <TouchableOpacity style={styles.icon}>
