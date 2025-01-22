@@ -1,16 +1,18 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
-import LoginFormPage from './LoginFormPage';
-import styles from './Estilos';
+import LoginFormPage from '../../components/LoginFormPage';
+import styles from '../../components/style';
+import {Image, StyleSheet} from 'react-native';
+
 
 const FormPage = () => {
     return (
         <View style={styles.container}>
 
-           {/* } <Image
-                source={require('../images/icon.png')}
-                style={styles.icon}
-            /> */}
+       <Image style={styles.icon}
+       source={require('../../assets/icon.png')}
+
+            /> 
             
 
             <Text style={styles.TitleText}>Bienvenido</Text>

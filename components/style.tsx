@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -8,11 +8,18 @@ const styles = StyleSheet.create({
     padding: 16,
 
   },
+  background :{
+    position: 'absolute',
+    left: 0,
+    right:0,
+    top:0,
+    height: 1000,
+  },
   icon: {
     width: 100,  
     height: 100, 
     marginBottom: 20, 
-    alignSelf: 'center', 
+    alignItems: 'center',
   },
   TitleText: {
     textAlign: 'center',

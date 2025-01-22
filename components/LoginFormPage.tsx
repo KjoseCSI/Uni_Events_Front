@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text } from 'react-native';
 
-import styles from './Estilos';
+import styles from './style';
 
 const LoginFormPage = () => {
   const [email, setEmail] = useState('');
