@@ -105,28 +105,26 @@ export function AccelerometerSensor({handleLike,handlePass}) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Detector de inclinación con reset dinámico</Text>
-      <Text style={styles.text}>x: {x.toFixed(2)}</Text>
-      <Text style={styles.text}>y: {y.toFixed(2)}</Text>
-      <Text style={styles.text}>z: {z.toFixed(2)}</Text>
-      <Text style={styles.text}>
-        Referencia inicial de X: {initialX?.toFixed(2) ?? 'No establecida'}
-      </Text>
-      <Text style={styles.text}>Umbral relativo: {RELATIVE_THRESHOLD}</Text>
-      <Text style={styles.text}>Tiempo para reset: {STABLE_TIME} ms</Text>
+      {hasTriggeredRight && <Text style={[styles.alert, { backgroundColor: 'green' }]}>Asistire</Text>}
+      {hasTriggeredLeft && <Text style={[styles.alert, { backgroundColor: 'red' }]}>No me interesa</Text>}
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0.15,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    padding: 10,
   },
-  text: {
-    fontSize: 16,
-    marginVertical: 8,
+  alert: {
+    fontSize: 24,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    padding: 10,
+    borderRadius: 10,
   },
 });
