@@ -1,13 +1,15 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native';
-import FormPage from './screens/Events/FormPage';
+import LoginPage from './screens/Events/LoginPage';
 import styles from './components/style';
 
-export default function App() {
+function App() {
   return (
     <SafeAreaView style={styles.container}>
-     <FormPage /> 
+     <LoginPage /> 
       <StatusBar style="auto" /> 
     </SafeAreaView>
   );
 }
+export default App;
