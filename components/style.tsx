@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
     padding: 16,
 
   },
-  background :{
+  backgroundGradient :{
+    color: ' #004771, #CC0000',
     position: 'absolute',
     left: 0,
     right:0,
