@@ -5,10 +5,12 @@ import { RectButton } from "react-native-gesture-handler";
 import { SwipeableImage } from './SwipeableImage';
 
 
-export function Swipes({users, currentIndex}) {
+export function Swipes({users, currentIndex, handleLike, handlePass,}) {
+    
+
+
     
     function RightAction() {
-
         return(
             <RectButton style={styles.container} >
                 <SwipeableImage user={users[currentIndex + 1]} ></SwipeableImage>
@@ -31,6 +33,14 @@ export function Swipes({users, currentIndex}) {
     rightThreshold={40}
     renderLeftActions={LeftAction}
     renderRightActions={RightAction}
+    onSwipeableOpen={(dir) => {
+        if (dir === 'right') {
+            handleLike(); // Llamada al método cuando se deslice hacia la derecha
+        }else if(dir === 'left'){
+            handlePass();
+        }
+        console.log('open', dir);
+      }}
     >
         <SwipeableImage user={users[currentIndex]} ></SwipeableImage>
     </ReanimatedSwipeable>

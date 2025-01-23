@@ -7,12 +7,27 @@ import BottonBar from '../../components/BottonBar'
 import { SwipeableImage } from "../../components/SwipeableImage";
 import  {useFetchUsers}  from "../../services/RandomUserAPI"
 import { Swipes } from '../../components/Swipes'
-
+import { GyroscopeSensor } from "../../components/GyroscopeSensor";
+import { AccelerometerSensor } from '../../components/AccelerometerSensor'
 
 export default function MainEvents() {
   const { users, error, fetchUser } = useFetchUsers(); 
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  function handleLike() {
+    console.log('like')
+    nextUser()
+  }
+
+  function handlePass() {
+    console.log('pass')
+    nextUser()
+  }
+
+  function nextUser() {
+    const nextIndex = users.length - 2 === currentIndex ? 0 : currentIndex + 1
+    setCurrentIndex(nextIndex)
+  }
 
   return (
     <SafeAreaView style={styles.container} >
@@ -21,10 +36,12 @@ export default function MainEvents() {
       <View style={styles.swipes}>
         {
         users.length > 1 && 
-        <Swipes users={users} currentIndex={currentIndex} />
+        users.map((u,i) => currentIndex === i && (
+        <Swipes key={i} users={users} currentIndex={currentIndex} handleLike={handleLike} handlePass={handlePass} />
+        ) ) 
         }
       </View>
-      
+      <AccelerometerSensor handleLike={handleLike} handlePass={handlePass} />
       <BottonBar/>
     </SafeAreaView>
   )
