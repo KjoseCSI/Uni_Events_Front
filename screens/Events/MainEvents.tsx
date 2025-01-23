@@ -1,17 +1,18 @@
 import { Text, View, StyleSheet, Alert } from 'react-native'
-import React, { Component, useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Topbar } from '../../components/Topbar'
 import Searchinput from '../../components/Searchinput'
 import BottonBar from '../../components/BottonBar'
-import { SwipeableImage } from "../../components/SwipeableImage";
 import  {useFetchUsers}  from "../../services/RandomUserAPI"
 import { Swipes } from '../../components/Swipes'
 import { GyroscopeSensor } from "../../components/GyroscopeSensor";
 import { AccelerometerSensor } from '../../components/AccelerometerSensor'
+import { useFetchEvents } from "../../services/EventsStrapiAPI";
+
 
 export default function MainEvents() {
-  const { users, error, fetchUser } = useFetchUsers(); 
+  const { events, error, fetchUser } = useFetchEvents(); 
   const [currentIndex, setCurrentIndex] = useState(0)
 
   function handleLike() {
@@ -25,7 +26,7 @@ export default function MainEvents() {
   }
 
   function nextUser() {
-    const nextIndex = users.length - 2 === currentIndex ? 0 : currentIndex + 1
+    const nextIndex = events.length - 2 === currentIndex ? 0 : currentIndex + 1
     setCurrentIndex(nextIndex)
   }
 
@@ -35,9 +36,9 @@ export default function MainEvents() {
       <Searchinput label={'Buscar Evento ...'} />
       <View style={styles.swipes}>
         {
-        users.length > 1 && 
-        users.map((u,i) => currentIndex === i && (
-        <Swipes key={i} users={users} currentIndex={currentIndex} handleLike={handleLike} handlePass={handlePass} />
+        events.length > 1 && 
+        events.map((u,i) => currentIndex === i && (
+        <Swipes key={i} data={events} currentIndex={currentIndex} handleLike={handleLike} handlePass={handlePass} />
         ) ) 
         }
       </View>
