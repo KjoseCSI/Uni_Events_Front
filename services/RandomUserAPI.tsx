@@ -102,7 +102,7 @@ export function useFetchUsers() {
         try {
             const { data } = await axios.get<TopLevel>(url)
             setUsers(data.results)
-            console.log(data.results)
+            /* console.log(data.results) */
         } catch (error) {
             setError(error)
             console.log(error)
