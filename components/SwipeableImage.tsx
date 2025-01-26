@@ -2,6 +2,7 @@ import { View, Image, Text, StyleSheet } from 'react-native'
 import React from 'react'
 
 export function SwipeableImage({ data }) {
+
   return (
     <View>
         <Image source={{ uri: `http://192.168.100.2:1337/${data.ImageEvent.url}` } } style={styles.photo} />
