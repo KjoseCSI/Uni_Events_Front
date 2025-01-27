@@ -1,15 +1,21 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView } from 'react-native';
-import LoginPage from './screens/Events/LoginPage';
-import styles from './components/style';
+import { StyleSheet, View,Text } from 'react-native';
+import LoginPage from './screens/LoginPage'; // Asegúrate de que la ruta sea correcta
 
-function App() {
+export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-     <LoginPage /> 
-      <StatusBar style="auto" /> 
-    </SafeAreaView>
+      <View style={styles.container}>
+          <LoginPage />
+          
+      </View>
   );
 }
-export default App;
+
+const styles = StyleSheet.create({
+  container: {
+      flex: 1,
+      backgroundColor: '#003366',
+      alignItems: 'center',
+      justifyContent: 'center',
+  },
+});
