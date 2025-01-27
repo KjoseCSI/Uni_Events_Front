@@ -1,6 +1,10 @@
 import React from 'react';
 import { StyleSheet, View,Text } from 'react-native';
+<<<<<<< Updated upstream
 import LoginPage from './screens/LoginPage'; // Asegúrate de que la ruta sea correcta
+=======
+import LoginPage from './screens/LoginPage'; 
+>>>>>>> Stashed changes
 import RegistrationPage from './screens/RegistrationPage';
 
 export default function App() {
@@ -12,6 +16,7 @@ export default function App() {
   );
 }
 
+//Style Login
 const styles = StyleSheet.create({
   container: {
       flex: 1,
