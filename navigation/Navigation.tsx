@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
     return(
-        <SafeAreaProvider >
+
         <Tab.Navigator
         initialRouteName="Home"
         screenOptions={{
@@ -66,62 +66,14 @@ function MyTabs() {
                 )
             }}/>
         </Tab.Navigator>
-        </SafeAreaProvider>
+
     )
 }
 
 export default function Navigation() {
     return(
         <NavigationContainer>
-        <SafeAreaView style={styles.container} >
-            <LinearGradient
-            colors={['#004771', '#CC0000']}
-            style={styles.background}
-            />
-
-            <GestureHandlerRootView>
-
-            <MyTabs>
-                
-            </MyTabs>
-            <StatusBar style="auto" />
-            </GestureHandlerRootView>
-        </SafeAreaView>
+            <MyTabs/>
         </NavigationContainer>
     )
 }
-
-
-const styles = StyleSheet.create({
-    containerBarBotton: {
-        alignItems: 'center',
-        height: 80,
-        marginBottom: 20,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        padding: 15,
-
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#004771',
-      },
-    icon:{
-        width: 50,
-        height: 50,
-        backgroundColor:'#CC0000',
-        borderRadius: 30 ,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-        text: {
-        color: 'white'
-    },
-    background: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
-        height: 1000,
-      },
-})
