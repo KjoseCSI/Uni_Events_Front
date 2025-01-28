@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Image, StyleSheet } from 'react-native';
+import { View, TextInput, Button, Text, Image, StyleSheet,TouchableOpacity  } from 'react-native';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -12,6 +12,9 @@ export default function LoginPage() {
         }
 
         alert(`Iniciando sesión con ${email}`);
+    };
+    const handleRegister = () => {
+        navigation.navigate('RegistrationPage'); // Asegúrate de que el nombre de la ruta sea correcto
     };
 
     return (
@@ -40,7 +43,10 @@ export default function LoginPage() {
                 <Button title="Iniciar sesión" onPress={handleLogin} />
             </View>
             <Text style={styles.linkText}>
-                ¿No tienes una cuenta? <Text style={styles.link}>Registrarse</Text>
+                ¿No tienes una cuenta?
+                <TouchableOpacity onPress={handleRegister}>
+                    <Text style={styles.link}> Registrarse</Text>
+                </TouchableOpacity>
             </Text>
             <Button title="Continuar con correo electrónico" onPress={() => { }} />
         </View>
