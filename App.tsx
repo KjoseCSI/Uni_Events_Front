@@ -5,30 +5,17 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import MapComponentView from './screens/Map/MapComponentView';
 import MapScreen from './screens/Map/MapScreen';
+import Navigation from "./navigation/Navigation";
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <LinearGradient
-        colors={['#004771', '#CC0000']}
-        style={styles.background}
-      />
-      {/* <GestureHandlerRootView>
-
-      <MainEvents/>
-      </GestureHandlerRootView>
-      <StatusBar style="auto" /> */}
-
-        <MapScreen/>
-    </SafeAreaView>
+          <Navigation/>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    /* alignItems: 'center', */
-    /* justifyContent: 'center', */
     backgroundColor: '#004771',
   },
   background: {

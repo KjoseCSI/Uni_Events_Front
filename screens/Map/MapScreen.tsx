@@ -13,7 +13,6 @@ export default function MapScreen() {
       <Topbar/>
       <Searchinput label={'Buscar Evento ...'} />
       <MapComponentView/>
-      <BottonBar/>
     </SafeAreaProvider>
   )
 }

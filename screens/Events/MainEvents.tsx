@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Topbar } from '../../components/Topbar'
 import Searchinput from '../../components/Searchinput'
-import BottonBar from '../../components/BottonBar'
 import  {useFetchUsers}  from "../../services/RandomUserAPI"
 import { Swipes } from '../../components/Swipes'
 import { GyroscopeSensor } from "../../components/GyroscopeSensor";
@@ -43,7 +42,6 @@ export default function MainEvents() {
         }
       </View>
       <AccelerometerSensor handleLike={handleLike} handlePass={handlePass} />
-      <BottonBar/>
     </SafeAreaView>
   )
 }
