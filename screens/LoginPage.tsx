@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Image, StyleSheet,TouchableOpacity  } from 'react-native';
+import { View, TextInput, Button, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import RegistrationPage from './RegistrationPage';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigation= useNavigation();
 
     const handleLogin = () => {
         if (!email || !password) {
             alert('Por favor, ingresa tu correo y contraseña.');
             return;
         }
-
         alert(`Iniciando sesión con ${email}`);
     };
     const handleRegister = () => {
-        navigation.navigate('RegistrationPage'); // Asegúrate de que el nombre de la ruta sea correcto
+        navigation.navigate( 'RegistrationPage' );
     };
 
     return (
@@ -37,11 +39,9 @@ export default function LoginPage() {
                     onChangeText={setPassword}
                     secureTextEntry
                 />
-                <View style={styles.checkboxContainer}>
-                    <Text style={styles.label}>Recordar contraseña</Text>
-                </View>
                 <Button title="Iniciar sesión" onPress={handleLogin} />
             </View>
+
             <Text style={styles.linkText}>
                 ¿No tienes una cuenta?
                 <TouchableOpacity onPress={handleRegister}>
