@@ -3,6 +3,8 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import  MainEvents from './screens/Events/MainEvents'
 import { LinearGradient } from 'expo-linear-gradient';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import MapComponentView from './screens/Map/MapComponentView';
+import MapScreen from './screens/Map/MapScreen';
 
 export default function App() {
   return (
@@ -11,11 +13,13 @@ export default function App() {
         colors={['#004771', '#CC0000']}
         style={styles.background}
       />
-      <GestureHandlerRootView>
+      {/* <GestureHandlerRootView>
 
       <MainEvents/>
       </GestureHandlerRootView>
-      <StatusBar style="auto" />
+      <StatusBar style="auto" /> */}
+
+        <MapScreen/>
     </SafeAreaView>
   );
 }
