@@ -3,12 +3,13 @@ import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Topbar } from '../../components/Topbar'
 import Searchinput from '../../components/Searchinput'
-import BottonBar from '../../components/BottonBar'
 import  {useFetchUsers}  from "../../services/RandomUserAPI"
 import { Swipes } from '../../components/Swipes'
 import { GyroscopeSensor } from "../../components/GyroscopeSensor";
 import { AccelerometerSensor } from '../../components/AccelerometerSensor'
 import { useFetchEvents } from "../../services/EventsStrapiAPI";
+import { LinearGradient } from 'expo-linear-gradient';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 export default function MainEvents() {
@@ -32,6 +33,14 @@ export default function MainEvents() {
 
   return (
     <SafeAreaView style={styles.container} >
+    <LinearGradient
+    colors={['#004771', '#CC0000']}
+    style={styles.background}
+    />
+
+    <GestureHandlerRootView>
+
+    <SafeAreaView style={styles.subContainer} >
       <Topbar/>
       <Searchinput label={'Buscar Evento ...'} />
       <View style={styles.swipes}>
@@ -43,7 +52,8 @@ export default function MainEvents() {
         }
       </View>
       <AccelerometerSensor handleLike={handleLike} handlePass={handlePass} />
-      <BottonBar/>
+    </SafeAreaView>
+      </GestureHandlerRootView>
     </SafeAreaView>
   )
 }
@@ -51,6 +61,11 @@ export default function MainEvents() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#CC0000',
+  },
+  subContainer: {
+    flex: 1,
+    /* backgroundColor: '#004771', */
   },
 swipes: {
   flex: 1,
@@ -64,5 +79,12 @@ swipes: {
   shadowOpacity: 0.29,
   shadowRadius: 4.65,
   elevation: 7,
+},
+background: {
+  position: 'absolute',
+  left: 0,
+  right: 0,
+  top: 0,
+  height: '100%',
 },
 })
