@@ -14,70 +14,70 @@ export default function RegistrationPage() {
     const handleLogin = () => {
         // Validación de campos
         if (!firstName) {
-            Alert.alert('Error', 'Por favor, completa el campo Nombre.');
+            Alert.alert('Error', 'Please complete the Name field!');
             return;
         }
         if (!lastName) {
-            Alert.alert('Error', 'Por favor, completa el campo Apellido.');
+            Alert.alert('Error', 'Please complete the Last Name field!');
             return;
         }
         if (!phoneNumber) {
-            Alert.alert('Error', 'Por favor, completa el campo Número de celular.');
+            Alert.alert('Error', 'Por favor, completa el campo Número de celular!');
             return;
         }
         if (!email) {
-            Alert.alert('Error', 'Por favor, completa el campo Correo electrónico.');
+            Alert.alert('Error', 'Please complete the Cell Phone Number field!');
             return;
         }
         if (!password) {
-            Alert.alert('Error', 'Por favor, completa el campo Contraseña.');
+            Alert.alert('Error', 'Please complete the password!');
             return;
         }
         if (!faculty) {
-            Alert.alert('Error', 'Por favor, completa el campo Facultad.');
+            Alert.alert('Error', 'Please complete the Faculty field!');
             return;
         }
         if (!career) {
-            Alert.alert('Error', 'Por favor, completa el campo Carrera.');
+            Alert.alert('Error', 'Please complete the Career field!');
             return;
         }
 
         // validation email
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(email)) {
-            Alert.alert('Error', 'Correo electrónico inválido. Asegúrate de incluir "@" y un dominio.');
+            Alert.alert('Error', 'Invalid email. Be sure to include "@" and a domain.');
             return;
         }
-        Alert.alert('Éxito', `Iniciando sesión con ${email}`);
+        Alert.alert('Éxito', `Logging in with ${email}`);
     };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.TitleText}>Registro de Usuario</Text>
+            <Text style={styles.TitleText}>User Registration</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Nombre"
+                placeholder="Name"
                 value={firstName}
                 onChangeText={setFirstName} />
             <TextInput
                 style={styles.input}
-                placeholder="Apellido"
+                placeholder="Last name"
                 value={lastName}
                 onChangeText={setLastName} />
             <TextInput
                 style={styles.input}
-                placeholder="Número de celular"
+                placeholder="Cell phone number"
                 value={phoneNumber}
                 onChangeText={setPhoneNumber}
                 keyboardType="phone-pad" />
             <TextInput
                 style={styles.input}
-                placeholder="Facultad"
+                placeholder="Faculty"
                 value={faculty}
                 onChangeText={setFaculty} />
             <TextInput
                 style={styles.input}
-                placeholder="Carrera"
+                placeholder="Career"
                 value={career}
                 onChangeText={setCareer} />
             <TextInput
@@ -94,7 +94,7 @@ export default function RegistrationPage() {
                 onChangeText={setPassword}
                 secureTextEntry />
 
-            <Button title="Iniciar Sesión" onPress={handleLogin} />
+            <Button title="Sing In" onPress={handleLogin} />
         </View>
     );
 
@@ -109,18 +109,18 @@ const styles = StyleSheet.create({
     TitleText: {
         textAlign: 'center',
         marginBottom: 30,
-        color: 'white', 
-        fontSize: 24,   
+        color: 'white',
+        fontSize: 24,
         fontWeight: 'bold',
-      },
-      input: {
+    },
+    input: {
         height: 40,
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 12,
         paddingLeft: 8,
         backgroundColor: '#9095a1',
-      },
-    
+    },
+
 
 });

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, TextInput, Button, Text, Image, StyleSheet } from 'react-native';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -7,52 +7,42 @@ export default function LoginPage() {
 
     const handleLogin = () => {
         if (!email || !password) {
-            alert('Por favor, ingresa tu correo y contraseña.');
+            alert('Please enter your email and password.');
             return;
         }
 
-        alert(`Iniciando sesión con ${email}`);
+        alert(`Logging in with ${email}`);
     };
 
     return (
         <View style={styles.container}>
             <Image style={styles.icon} source={require('../assets/icon.png')} />
             <Text style={styles.TitleText}>Welcome</Text>
-
-            <View style={styles.card}>
-                <Text style={styles.input}> Enter your institutional email:</Text>
-
+            <View style={styles.formContainer}>
                 <TextInput
                     style={styles.input}
-                    placeholder="e-mail"
+                    placeholder="email@uce.edu.ec"
                     value={email}
                     onChangeText={setEmail}
                     keyboardType="email-address"
                     autoCapitalize="none"
                 />
-                <Text style={styles.input}> Enter your password: </Text>
-
                 <TextInput
                     style={styles.input}
-                    placeholder="Password:"
+                    placeholder="Password"
                     value={password}
                     onChangeText={setPassword}
                     secureTextEntry
                 />
-                <View style={styles.buttonBox}>
-                    <TouchableOpacity onPress={handleLogin}>
-                        <Text style={styles.textButton}>
-                            Sin In
-                        </Text>
-                    </TouchableOpacity>
-
-                </View>
+                
+                <Button title="Sing In" onPress={handleLogin} />
             </View>
-
             <Text style={styles.linkText}>
-                Don't have an account?<Text style={styles.link}>Register</Text>
+
+                Don't have an account? <Text style={styles.link}>Register here</Text>
             </Text>
-            <Button title="Continuar con correo electrónico" onPress={() => { }} />
+            <Button title=
+                "Continue with email" onPress={() => { }} />
         </View>
     );
 }
@@ -68,6 +58,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         width: 100,
         height: 100,
+        marginBottom: 20,
     },
     TitleText: {
         textAlign: 'center',
@@ -76,29 +67,8 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
     },
-    card: {
-        margin: 20,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        borderRadius: 20,
-        width: '90%',
-        padding: 16,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 20,
-    },
-    buttonBox: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#019dff',
-        borderRadius: 30,
-        paddingVertical: 20,
-        width: 150,
-        marginTop: 20,
-        margin: 10,
-
+    formContainer: {
+        marginBottom: 20,
     },
     input: {
         height: 40,
@@ -108,10 +78,13 @@ const styles = StyleSheet.create({
         paddingLeft: 8,
         backgroundColor: '#9095a1',
     },
-    textButton: {
+    checkboxContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 12,
+    },
+    label: {
         color: 'white',
-        textAlign: 'center',
-        fontSize: 16,
     },
     linkText: {
         textAlign: 'center',
