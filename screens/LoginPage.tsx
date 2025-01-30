@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, TextInput, Button, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -12,13 +12,13 @@ export default function LoginPage() {
             return;
         }
         //Validate email format
-        const emailPattern =/^[^\s@] + @[^\s@]+ \.[^\s@] + $/ ; 
+        const emailPattern =/^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
         if (!emailPattern.test(email)){
             alert('Email or password entered incorrectly. Make sure the email contains "@" and a domain.');
             return;
         }
         //If you entered both fields correctly, login message
-        alert(`Logging in with ${email}`);
+        alert(`Login in with: ${email}`);
     };
 
     return (

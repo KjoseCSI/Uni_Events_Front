@@ -21,11 +21,12 @@ export default function RegistrationPage() {
         Alert.alert('Success', 'Your information has been successfully registered. Logging in...');
 
     }
+    
     const validateInput = () => {
         let errors = [];
         const namePattern = /^[A-Za-z]+$/;
         const phonePattern = /^\d{10}$/;
-        const emailPattern = /^[^\s@] + @[^\s@]+ \.[^\s@] + $/;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!firstName || firstName.length > 10) {
             errors.push('Name must have a maximum of 10 characters.');
@@ -33,8 +34,9 @@ export default function RegistrationPage() {
         if (!phonePattern.test(phoneNumber)) {
             errors.push('The number entered is incorrect');
         }
-        if (!emailPattern.test(email)) {
-            errors.push('Invalid email.');
+        if (!emailPattern.test(email)){
+            alert(' Make sure the email contains "@" and a domain.');
+            return;
         }
         if (!password) {
             errors.push('Please complete the password!');
