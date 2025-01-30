@@ -53,48 +53,71 @@ export default function RegistrationPage() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.TitleText}>User Registration</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Name"
-                value={firstName}
-                onChangeText={setFirstName} />
-            <TextInput
-                style={styles.input}
-                placeholder="Last name"
-                value={lastName}
-                onChangeText={setLastName} />
-            <TextInput
-                style={styles.input}
-                placeholder="Cell phone number"
-                value={phoneNumber}
-                onChangeText={setPhoneNumber}
-                keyboardType="phone-pad" />
-            <TextInput
-                style={styles.input}
-                placeholder="Faculty"
-                value={faculty}
-                onChangeText={setFaculty} />
-            <TextInput
-                style={styles.input}
-                placeholder="Career"
-                value={career}
-                onChangeText={setCareer} />
-            <TextInput
-                style={styles.input}
-                placeholder="Correo electrónico"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none" />
-            <TextInput
-                style={styles.input}
-                placeholder="Contraseña"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry />
 
-            <Button title="Sing In" onPress={handleLogin} />
+            <Text style={styles.TitleText}>User Registration</Text>
+
+            <View style={styles.Card}>
+                <View style={styles.textBox}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Name"
+                        value={firstName}
+                        onChangeText={setFirstName} />
+                </View>
+
+                <View style={styles.textBox}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Last name"
+                        value={lastName}
+                        onChangeText={setLastName} />
+                </View>
+
+                <View style={styles.textBox}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Cell phone number"
+                        value={phoneNumber}
+                        onChangeText={setPhoneNumber}
+                        keyboardType="phone-pad" />
+                </View>
+
+                <View style={styles.textBox}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Faculty"
+                        value={faculty}
+                        onChangeText={setFaculty} />
+                </View>
+
+                <View style={styles.textBox}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Career"
+                        value={career}
+                        onChangeText={setCareer} />
+                </View>
+                <View style={styles.textBox}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Correo electrónico"
+                        value={email}
+                        onChangeText={setEmail}
+                        keyboardType="email-address"
+                        autoCapitalize="none" />
+                </View>
+
+                <View style={styles.textBox}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Contraseña"
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry />
+                </View>
+
+            <Button title="Sing" onPress={handleLogin} />
+            </View>
         </View>
     );
 
@@ -115,11 +138,27 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 12,
         paddingLeft: 8,
-        backgroundColor: '#9095a1',
+        color: '#9095a1',
+    },
+    Card: {
+        margin: 10,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        borderRadius: 20,
+        width: '95%',
+        padding: 16,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 10,
+    },
+    textBox: {
+        paddingVertical: 5,
+        backgroundColor: '#cccccc90',
+        marginVertical: 10,
+        borderRadius: 10,
     },
 
 

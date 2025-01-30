@@ -8,17 +8,10 @@ import RegistrationPage from './screens/RegistrationPage';
 const Stack = createStackNavigator(); 
 export default function App() {
   return (
-    <LoginPage/>
+    
+    <RegistrationPage/>
   
   );  
 }
 
-//Style Login
-const styles = StyleSheet.create({
-  container: {
-      flex: 1,
-      backgroundColor: '#003366',
-      alignItems: 'center',
-      justifyContent: 'center',
-  },
-});
+
