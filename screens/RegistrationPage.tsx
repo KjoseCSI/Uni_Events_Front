@@ -1,87 +1,80 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Alert, StyleSheet,TouchableOpacity } from 'react-native';
+import { View, TextInput, Button, Text, Alert, StyleSheet, TouchableOpacity } from 'react-native';
 
 
 export default function RegistrationPage() {
     const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [faculty, setFaculty] = useState('');
-    const [career, setCareer] = useState('');
 
+    // Field validationS
+    // validation of complete fields.
     const handleLogin = () => {
-        // Validación de campos
-        if (!firstName) {
-            Alert.alert('Error', 'Please complete the Name field!');
+        const errors = validateInput();
+        if (errors.length > 0) {
+            Alert.alert('Error', errors.join('\n'));
             return;
         }
-        if (!lastName) {
-            Alert.alert('Error', 'Please complete the Last Name field!');
-            return;
+        Alert.alert('Success', 'Your information has been successfully registered. Logging in...');
+
+    }
+    const validateInput = () => {
+        let errors = [];
+        const namePattern = /^[A-Za-z]+$/;
+        const phonePattern = /^\d{10}$/;
+        const emailPattern = /^[^\s@] + @[^\s@]+ \.[^\s@] + $/;
+
+        if (!firstName || firstName.length > 10) {
+            errors.push('Name must have a maximum of 10 characters.');
         }
-        if (!phoneNumber) {
-            Alert.alert('Error', 'Por favor, completa el campo Número de celular!');
-            return;
+        if (!phonePattern.test(phoneNumber)) {
+            errors.push('The number entered is incorrect');
         }
-        if (!email) {
-            Alert.alert('Error', 'Please complete the Cell Phone Number field!');
-            return;
+        if (!emailPattern.test(email)) {
+            errors.push('Invalid email.');
         }
         if (!password) {
-            Alert.alert('Error', 'Please complete the password!');
-            return;
+            errors.push('Please complete the password!');
         }
-        if (!faculty) {
-            Alert.alert('Error', 'Please complete the Faculty field!');
-            return;
+        if (password !== confirmPassword) {
+            errors.push('Passwords do not match.');
         }
-        if (!career) {
-            Alert.alert('Error', 'Please complete the Career field!');
-            return;
+        if (!namePattern.test(faculty)) {
+            errors.push('Only letters are allowed.');
         }
 
-        // validation email
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(email)) {
-            Alert.alert('Error', 'Invalid email. Be sure to include "@" and a domain.');
-            return;
-        }
-        Alert.alert('Éxito', `Logging in with ${email}`);
+        return errors;
     };
+
 
     return (
         <View style={styles.container}>
-
             <Text style={styles.TitleText}>User Registration</Text>
 
             <View style={styles.Card}>
+
+            <Text style={styles.inputLabel}>Enter your username:</Text>
                 <View style={styles.textBox}>
                     <TextInput
                         style={styles.input}
-                        placeholder="Name"
+                        placeholder="User Name"
                         value={firstName}
                         onChangeText={setFirstName} />
                 </View>
-
+                <Text style={styles.inputLabel}>Enter your cell phone number:</Text>
                 <View style={styles.textBox}>
                     <TextInput
                         style={styles.input}
-                        placeholder="Last name"
-                        value={lastName}
-                        onChangeText={setLastName} />
-                </View>
-
-                <View style={styles.textBox}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Cell phone number"
+                        placeholder="Number"
                         value={phoneNumber}
                         onChangeText={setPhoneNumber}
                         keyboardType="phone-pad" />
                 </View>
 
+                <Text style={styles.inputLabel}>Enter your Faculty:</Text>
                 <View style={styles.textBox}>
                     <TextInput
                         style={styles.input}
@@ -90,41 +83,48 @@ export default function RegistrationPage() {
                         onChangeText={setFaculty} />
                 </View>
 
+
+                <Text style={styles.inputLabel}>Enter your institutional email:</Text>
                 <View style={styles.textBox}>
                     <TextInput
                         style={styles.input}
-                        placeholder="Career"
-                        value={career}
-                        onChangeText={setCareer} />
-                </View>
-                <View style={styles.textBox}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Correo electrónico"
+                        placeholder="email@uce.edu.ec"
                         value={email}
                         onChangeText={setEmail}
                         keyboardType="email-address"
                         autoCapitalize="none" />
                 </View>
 
+                <Text style={styles.inputLabel}>Enter your password:</Text>
                 <View style={styles.textBox}>
                     <TextInput
                         style={styles.input}
-                        placeholder="Contraseña"
+                        placeholder="Pasword"
                         value={password}
                         onChangeText={setPassword}
                         secureTextEntry />
                 </View>
-
-                <View style={styles.Boton}>
-                    <TouchableOpacity style={styles.boxButton} onPress={handleLogin}>
-                        <Text style={styles.TextButton}>
-                            Sing In
-                        </Text>
-                    </TouchableOpacity>
+                
+                <Text style={styles.inputLabel}>Confirm your password:</Text>
+                <View style={styles.textBox}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Confirm Password"
+                        value={confirmPassword}
+                        onChangeText={setConfirmPassword}
+                        secureTextEntry
+                    />
                 </View>
             </View>
+            <View style={styles.Boton}>
+                <TouchableOpacity style={styles.boxButton} onPress={handleLogin}>
+                    <Text style={styles.TextButton}>
+                        Sing In
+                    </Text>
+                </TouchableOpacity>
+            </View>
         </View>
+
     );
 
 }
@@ -142,10 +142,20 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
     },
+    inputLabel: { 
+        marginBottom: 5, 
+        color: '#9095a1',
+        fontSize: 14, 
+    },
     input: {
-        height: 40,
+        height: 40, 
+        paddingVertical: 10,
         paddingLeft: 8,
         color: '#9095a1',
+        borderWidth: 1, 
+        borderColor: '#cccccc', 
+        borderRadius: 10, 
+        fontSize: 12,
     },
     Card: {
         margin: 10,
@@ -156,9 +166,8 @@ const styles = StyleSheet.create({
         padding: 16,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
         shadowRadius: 4,
-        elevation: 10,
+        elevation: 5,
     },
     textBox: {
         paddingVertical: 5,
@@ -166,11 +175,16 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         borderRadius: 10,
     },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginVertical: 10,
+    },
     Boton: {
         alignItems: 'center',
     },
-    boxButton:{
-        backgroundColor: '#003366',
+    boxButton: {
+        backgroundColor: '#019dff',
         borderRadius: 30,
         paddingVertical: 20,
         width: 150,
