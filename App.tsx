@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import  MainEvents from './screens/Events/MainEvents'
@@ -28,3 +29,22 @@ const styles = StyleSheet.create({
     height: 1000,
   },
 });
+=======
+import React from 'react';
+import { StyleSheet, View,Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import LoginPage from './screens/LoginPage'; 
+import RegistrationPage from './screens/RegistrationPage';
+
+const Stack = createStackNavigator(); 
+export default function App() {
+  return (
+    
+    <RegistrationPage/>
+  
+  );  
+}
+
+
+>>>>>>> Develop
