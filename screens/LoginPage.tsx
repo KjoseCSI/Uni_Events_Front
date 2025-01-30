@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Image, StyleSheet } from 'react-native';
+import { View, TextInput, Button, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -23,7 +23,7 @@ export default function LoginPage() {
 
             <View style={styles.Card}>
                 <Text style={styles.input}>Enter your institutional email:</Text>
-                
+
                 <View style={styles.textBox}>
                     <TextInput
                         style={styles.input}
@@ -46,16 +46,25 @@ export default function LoginPage() {
                     />
                 </View>
 
-
-                <Button title="Sing In" onPress={handleLogin} />
+                <View style={styles.Boton}>
+                    <TouchableOpacity style={styles.boxButton} onPress={handleLogin}>
+                        <Text style={styles.TextButton}>
+                            Sing In
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
 
-            <Text style={styles.linkText}>
-
-                Don't have an account? <Text style={styles.link}>Register here</Text>
-            </Text>
-            <Button title=
-                "Continue with email" onPress={() => { }} />
+            <View>
+                <Text style={styles.input}>
+                    Don't have an account?    . 
+                    <TouchableOpacity > 
+                       <Text style={styles.link}>Register here</Text>
+                    </TouchableOpacity>
+                </Text>
+                <Button title=
+                    "Continue with email" onPress={() => { }} />
+            </View>
         </View>
     );
 }
@@ -65,6 +74,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#003366',
         justifyContent: 'center',
+        alignItems: 'center',
         padding: 16,
     },
     icon: {
@@ -94,8 +104,7 @@ const styles = StyleSheet.create({
         elevation: 10,
     },
     input: {
-        height: 40,
-        paddingLeft: 8,
+        height: 35,
         color: '#9095a1',
     },
     textBox: {
@@ -103,18 +112,29 @@ const styles = StyleSheet.create({
         backgroundColor: '#cccccc90',
         marginVertical: 10,
         borderRadius: 10,
+        fontWeight: 'bold',
+        
     },
-    label: {
-        color: 'white',
+    Boton: {
+        alignItems: 'center',
     },
-    linkText: {
+    boxButton:{
+        backgroundColor: '#003366',
+        borderRadius: 30,
+        paddingVertical: 20,
+        width: 150,
+        marginTop: 20,
+        margin: 10,
+    },
+    TextButton: {
         textAlign: 'center',
-        marginBottom: 30,
         color: 'white',
     },
     link: {
         color: '#ffffff',
         textDecorationLine: 'underline',
         fontWeight: 'bold',
+        margin: -6,
     },
+
 });

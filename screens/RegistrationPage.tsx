@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Alert, StyleSheet } from 'react-native';
+import { View, TextInput, Button, Text, Alert, StyleSheet,TouchableOpacity } from 'react-native';
 
 
 export default function RegistrationPage() {
@@ -116,7 +116,13 @@ export default function RegistrationPage() {
                         secureTextEntry />
                 </View>
 
-            <Button title="Sing" onPress={handleLogin} />
+                <View style={styles.Boton}>
+                    <TouchableOpacity style={styles.boxButton} onPress={handleLogin}>
+                        <Text style={styles.TextButton}>
+                            Sing In
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     );
@@ -160,6 +166,20 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         borderRadius: 10,
     },
-
+    Boton: {
+        alignItems: 'center',
+    },
+    boxButton:{
+        backgroundColor: '#003366',
+        borderRadius: 30,
+        paddingVertical: 20,
+        width: 150,
+        marginTop: 20,
+        margin: 10,
+    },
+    TextButton: {
+        textAlign: 'center',
+        color: 'white',
+    },
 
 });
