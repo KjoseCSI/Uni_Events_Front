@@ -1,11 +1,10 @@
 import { View, Text, StyleSheet } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import MapComponentView from './MapComponentView'
-import BottonBar from '../../components/BottonBar'
 import { Topbar } from '../../components/Topbar'
 import Searchinput from '../../components/Searchinput'
 import { LinearGradient } from 'expo-linear-gradient';
-
+import { useEventsContext } from "../../hooks/useEventsContext";
 
 export default function MapScreen() {
   return (

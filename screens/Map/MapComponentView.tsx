@@ -3,7 +3,8 @@ import { View, Text, StyleSheet } from 'react-native'
 import MapView, {Marker, Polyline} from 'react-native-maps';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MapViewDirections from 'react-native-maps-directions';
-import { GOOGLE_MAPS_KEY } from "@env";
+import { GOOGLE_MAPS_KEY } from ".env";
+
 
 export default function MapComponentView() {
 

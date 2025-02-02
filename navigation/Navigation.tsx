@@ -9,14 +9,17 @@ import MapScreen from "../screens/Map/MapScreen";
 import React from "react";
 import LoginPage from '../screens/LoginPage'
 import RegistrationPage from "../screens/RegistrationPage"
+import { createStackNavigator } from "@react-navigation/stack";
+import { ModalScreen } from "../screens/Events/EventDetails";
 
 
 const Tab = createBottomTabNavigator();
-
+const RootStack = createStackNavigator();
 function MyTabs() {
     return(
 
         <Tab.Navigator
+        id={undefined}
         initialRouteName="Home"
         screenOptions={{
             headerShown: false,
@@ -72,6 +75,12 @@ function MyTabs() {
 export default function Navigation() {
     return(
         <NavigationContainer>
+            <RootStack.Navigator
+            id={undefined}>
+                <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+                    <RootStack.Screen name="EventDetail" component={ModalScreen} />
+                </RootStack.Group>
+            </RootStack.Navigator>
             <MyTabs/>
         </NavigationContainer>
     )

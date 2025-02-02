@@ -1,9 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, Image, Alert, Share } from "react-native";
+import { View, Text, Image, Alert, Share,StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from 'react-native-paper';
+import { useEventsContext } from "../../hooks/useEventsContext";
+import { GOOGLE_MAPS_KEY, API_BASE_URL } from ".env";
 
-export function ModalScreen() {
+export function ModalScreen(currentIndex) {
+  const {events, error} = useEventsContext();
   const navigation = useNavigation();
 
   const onShare = async () => {
@@ -28,15 +31,16 @@ export function ModalScreen() {
 
   return (
     <SafeAreaView>
-      <Image source={{ uri: `http://192.168.100.2:1337/${data.ImageEvent.url}` } } style={styles.photo} />
+      <Image source={{ uri: `${API_BASE_URL}${events[currentIndex].ImageEvent.url}` } } style={styles.photo} />
       <Button 
       icon="share-variant-outline" 
       mode="contained-tonal" 
       buttonColor="#9C9B9B"
       textColor="white"
       onPress={onShare}>
-        Press me
+        Comparte este Evento con tus amigos!!!
       </Button>
+      <Button onPress={() => navigation.goBack()}>Atras</Button>
     </SafeAreaView>
 
     /* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -44,4 +48,12 @@ export function ModalScreen() {
       <Button onPress={() => navigation.goBack()}>Dismiss</Button>
     </View> */
   );
-}
+};
+
+const styles = StyleSheet.create({
+    photo:{
+      height: '100%',
+      resizeMode: 'cover',
+      borderRadius: 20,
+    },
+});

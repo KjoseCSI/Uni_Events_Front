@@ -8,10 +8,15 @@ import { AccelerometerSensor } from '../../components/AccelerometerSensor'
 import { LinearGradient } from 'expo-linear-gradient';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useEventsContext } from "../../hooks/useEventsContext";
+import { Button } from 'react-native-paper';
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function MainEvents() {
   const { events, error } = useEventsContext(); 
   const [currentIndex, setCurrentIndex] = useState(0)
+  const navigation = useNavigation();
+
 
   function handleLike() {
     console.log('like')
@@ -48,6 +53,7 @@ export default function MainEvents() {
         ) ) 
         }
       </View>
+      <Button onPress={() => navigation.navigate('EventDetail')}>Open Modal</Button>
       <AccelerometerSensor handleLike={handleLike} handlePass={handlePass} />
     </SafeAreaView>
       </GestureHandlerRootView>
