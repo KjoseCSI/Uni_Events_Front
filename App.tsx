@@ -25,6 +25,7 @@ const config = {
 export default function App() {
   return (
     <NavigationContainer>
+      <Stack.Navigator>
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="Registration" component={RegistrationPage}
 
@@ -44,7 +45,7 @@ export default function App() {
             },
           }}
         />
-
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

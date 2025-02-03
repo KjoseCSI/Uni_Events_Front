@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, Alert, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; //
+import { StackNavigationProp } from '@react-navigation/stack';//
+import { RootStackParamList } from '../RootStackParamList'; 
+
+type LoginPageNavigationProp = StackNavigationProp<RootStackParamList, 'Registration'>; //
 
 
 export default function RegistrationPage() {
@@ -9,16 +14,18 @@ export default function RegistrationPage() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [faculty, setFaculty] = useState('');
+    const navigation = useNavigation<LoginPageNavigationProp>(); // 
 
-    // Field validationS
+
     // validation of complete fields.
-    const handleLogin = () => {
+    const handleRegistration = () => {
         const errors = validateInput();
         if (errors.length > 0) {
             Alert.alert('Error', errors.join('\n'));
             return;
         }
         Alert.alert('Success', 'Your information has been successfully registered. Logging in...');
+        navigation.navigate('Home'); // Navigate to the Home page
 
     }
     
@@ -119,9 +126,9 @@ export default function RegistrationPage() {
                 </View>
             </View>
             <View style={styles.Boton}>
-                <TouchableOpacity style={styles.boxButton} onPress={handleLogin}>
+                <TouchableOpacity style={styles.boxButton} onPress={handleRegistration}>
                     <Text style={styles.TextButton}>
-                        Sing In
+                        Register
                     </Text>
                 </TouchableOpacity>
             </View>
