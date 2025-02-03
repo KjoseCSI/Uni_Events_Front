@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../RootStackParamList';
+
+//defining a new type = Define navigation properties, defines all routes and their parameters
+type LoginPageNavigationProp = StackNavigationProp<RootStackParamList,'Login'>;
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigation = useNavigation<LoginPageNavigationProp>(); // 
 
+    //input parameter validation
     const handleLogin = () => {
-        //Validate if fields are empty
+        
         if (!email || !password) {
             alert('Please enter your email and password.');
             return;
@@ -19,7 +27,15 @@ export default function LoginPage() {
         }
         //If you entered both fields correctly, login message
         alert(`Login in with: ${email}`);
+        navigation.navigate('Home'); //Navigate to the Home page  
     };
+    
+    // Navigate to the Registration page
+    const handleRegister = () => {
+        navigation.navigate('Registration'); // Navegar a la página de registro
+    };
+
+
 
     return (
         <View style={styles.container}>
@@ -64,7 +80,7 @@ export default function LoginPage() {
             <View>
                 <Text style={styles.input}>
                     Don't have an account?    . 
-                    <TouchableOpacity > 
+                    <TouchableOpacity onPressIn={handleRegister }> 
                        <Text style={styles.link}>Register here</Text>
                     </TouchableOpacity>
                 </Text>
