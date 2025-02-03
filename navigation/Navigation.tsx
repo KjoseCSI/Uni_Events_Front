@@ -10,11 +10,13 @@ import React from "react";
 import LoginPage from '../screens/LoginPage'
 import RegistrationPage from "../screens/RegistrationPage"
 import { createStackNavigator } from "@react-navigation/stack";
-import { ModalScreen } from "../screens/Events/EventDetails";
-
+import { EventDetails } from "../screens/Events/EventDetails";
+import { RootStackParamList } from "./navigationModel";
 
 const Tab = createBottomTabNavigator();
-const RootStack = createStackNavigator();
+const RootStack = createStackNavigator<RootStackParamList>();
+
+
 function MyTabs() {
     return(
 
@@ -74,14 +76,25 @@ function MyTabs() {
 
 export default function Navigation() {
     return(
+
         <NavigationContainer>
-            <RootStack.Navigator
-            id={undefined}>
-                <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-                    <RootStack.Screen name="EventDetail" component={ModalScreen} />
-                </RootStack.Group>
-            </RootStack.Navigator>
-            <MyTabs/>
+        <RootStack.Navigator
+        id={undefined}>
+            <RootStack.Group screenOptions={{ presentation: "modal" }}>
+            <RootStack.Screen
+                name="EventDetails"
+                component={EventDetails}
+                options={{ title: "Detalles del Evento" }}
+            />
+            </RootStack.Group>
+
+            <RootStack.Screen
+            name="Main"
+            component={MyTabs}
+            options={{ headerShown: false }}
+            />
+        </RootStack.Navigator>
         </NavigationContainer>
+
     )
 }

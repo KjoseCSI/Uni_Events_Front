@@ -5,7 +5,7 @@ import { Button } from 'react-native-paper';
 import { useEventsContext } from "../../hooks/useEventsContext";
 import { GOOGLE_MAPS_KEY, API_BASE_URL } from ".env";
 
-export function ModalScreen(currentIndex) {
+export function EventDetails(currentIndex) {
   const {events, error} = useEventsContext();
   const navigation = useNavigation();
 

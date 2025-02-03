@@ -39,9 +39,7 @@ export default function MainEvents() {
     colors={['#004771', '#CC0000']}
     style={styles.background}
     />
-
     <GestureHandlerRootView>
-
     <SafeAreaView style={styles.subContainer} >
       <Topbar/>
       <Searchinput label={'Buscar Evento ...'} />
@@ -53,7 +51,7 @@ export default function MainEvents() {
         ) ) 
         }
       </View>
-      <Button onPress={() => navigation.navigate('EventDetail')}>Open Modal</Button>
+      <Button onPress={() => navigation.navigate('EventDetails',{currentIndex})}>Detalles</Button>
       <AccelerometerSensor handleLike={handleLike} handlePass={handlePass} />
     </SafeAreaView>
       </GestureHandlerRootView>
