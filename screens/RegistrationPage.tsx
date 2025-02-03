@@ -33,7 +33,7 @@ export default function RegistrationPage() {
         const namePattern = /^[A-Za-z]+$/;
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        //Check if all fields are filled 
+        //Check if all fields are correct. 
         if (!firstName) {
             errors.push('Please fill in your username.');
         }
