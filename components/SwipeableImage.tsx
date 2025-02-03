@@ -1,18 +1,18 @@
 import { View, Image, Text, StyleSheet } from 'react-native'
 import React from 'react'
 
-export function SwipeableImage({ data }) {
+export function SwipeableImage({ data: events }) {
 
   return (
     <View>
-        <Image source={{ uri: `http://192.168.100.2:1337/${data.ImageEvent.url}` } } style={styles.photo} />
+        <Image source={{ uri: `${events.event_photo.url}` } } style={styles.photo} />
         
         <View style={styles.textContainer}>
-          <Text style={[styles.textPrimary, styles.textShadow]}>{data.title}
+          <Text style={[styles.textPrimary, styles.textShadow]}>{events.event_name}
           </Text>
-          <Text style={[styles.textSecondary, styles.textShadow]} > fecha: {data.EventTime} </Text>
+          <Text style={[styles.textSecondary, styles.textShadow]} > fecha: {events.event_date} </Text>
           <View style={styles.textRow} >
-            <Text style={[styles.textSecondary, styles.textShadow]} > {data.EventDescription[0]?.children[0]?.text || "Texto no disponible"} </Text>
+            <Text style={[styles.textSecondary, styles.textShadow]} > {events.event_description || "Texto no disponible"} </Text>
           </View>
         </View>
     </View>

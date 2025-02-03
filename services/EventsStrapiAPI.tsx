@@ -2,56 +2,11 @@ import { Alert } from 'react-native'
 import { useEffect, useState } from 'react'
 import axios from "axios";
 
-
-
-export interface TopLevel {
-    data: Datum[];
-    meta: Meta;
-}
-
-export interface Datum {
-    id:               number;
-    documentId:       string;
-    title:            string;
-    EventTime:        Date;
-    EventDescription: EventDescription[];
-    createdAt:        Date;
-    updatedAt:        Date;
-    publishedAt:      Date;
-    ImageEvent:       ImageEvent;
-}
-
-export interface EventDescription {
-    type:     string;
-    children: Child[];
-}
-
-export interface Child {
-    type: string;
-    text: string;
-}
-
-export interface ImageEvent {
-    id:         number;
-    documentId: string;
-    url:        string;
-}
-
-export interface Meta {
-    pagination: Pagination;
-}
-
-export interface Pagination {
-    page:      number;
-    pageSize:  number;
-    pageCount: number;
-    total:     number;
-}
-
+import { TopLevel,Datum } from "../models/EventsModel";
 
 export function useFetchEvents() {
-    
-    const url = 'http://192.168.100.2:1337/api/events?populate=[id][fields][0]=id&populate[ImageEvent][fields][0]=url';
+    const otherUrl = "http://localhost:1337/api/events?populate[event_photo][fields][0]=url";
+    const url = 'https://orderly-friend-4d1c9cae02.strapiapp.com/api/events?populate[event_photo][fields][0]=url';
     const [events, setEvents] = useState<Datum[]>([])
     const [ error, setError ] = useState(null)
 
@@ -71,5 +26,5 @@ export function useFetchEvents() {
         fetchUser();
     }, [])
 
-    return { events , error, fetchUser}
+    return { events , error}
 }
