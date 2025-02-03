@@ -3,18 +3,20 @@ import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Topbar } from '../../components/Topbar'
 import Searchinput from '../../components/Searchinput'
-import  {useFetchUsers}  from "../../services/RandomUserAPI"
 import { Swipes } from '../../components/Swipes'
-import { GyroscopeSensor } from "../../components/GyroscopeSensor";
 import { AccelerometerSensor } from '../../components/AccelerometerSensor'
-import { useFetchEvents } from "../../services/EventsStrapiAPI";
 import { LinearGradient } from 'expo-linear-gradient';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useEventsContext } from "../../hooks/useEventsContext";
+import { Button } from 'react-native-paper';
+import { useNavigation } from "@react-navigation/native";
 
 
 export default function MainEvents() {
-  const { events, error, fetchUser } = useFetchEvents(); 
+  const { events, error } = useEventsContext(); 
   const [currentIndex, setCurrentIndex] = useState(0)
+  const navigation = useNavigation();
+
 
   function handleLike() {
     console.log('like')
@@ -51,6 +53,7 @@ export default function MainEvents() {
         ) ) 
         }
       </View>
+      <Button onPress={() => navigation.navigate('EventDetail')}>Open Modal</Button>
       <AccelerometerSensor handleLike={handleLike} handlePass={handlePass} />
     </SafeAreaView>
       </GestureHandlerRootView>
