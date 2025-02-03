@@ -3,9 +3,18 @@ import { View, Text, Image, Alert, Share,StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from 'react-native-paper';
 import { useEventsContext } from "../../hooks/useEventsContext";
-import { GOOGLE_MAPS_KEY, API_BASE_URL } from ".env";
+import { RouteProp } from '@react-navigation/native';
 
-export function EventDetails(currentIndex) {
+type RootStackParamList = {
+  EventDetail: { currentIndex: number }; // Define los parámetros esperados
+};
+
+type EventDetailRouteProp = RouteProp<RootStackParamList, 'EventDetail'>;
+
+
+
+export function EventDetails({ route }: { route: EventDetailRouteProp }) {
+  const { currentIndex } = route.params;
   const {events, error} = useEventsContext();
   const navigation = useNavigation();
 
@@ -31,7 +40,11 @@ export function EventDetails(currentIndex) {
 
   return (
     <SafeAreaView>
-      <Image source={{ uri: `${API_BASE_URL}${events[currentIndex].ImageEvent.url}` } } style={styles.photo} />
+      <Image source={{ uri: `${events[currentIndex].event_photo.url}` } } style={styles.photo} />
+      <View>
+        {/* <Text>{events[currentIndex].event_date}</Text>
+        <Text></Text> */}
+      </View>
       <Button 
       icon="share-variant-outline" 
       mode="contained-tonal" 
@@ -43,10 +56,6 @@ export function EventDetails(currentIndex) {
       <Button onPress={() => navigation.goBack()}>Atras</Button>
     </SafeAreaView>
 
-    /* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 30 }}>This is a modal!</Text>
-      <Button onPress={() => navigation.goBack()}>Dismiss</Button>
-    </View> */
   );
 };
 
