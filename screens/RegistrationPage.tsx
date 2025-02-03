@@ -9,7 +9,6 @@ type LoginPageNavigationProp = StackNavigationProp<RootStackParamList, 'Registra
 
 export default function RegistrationPage() {
     const [firstName, setFirstName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -37,9 +36,6 @@ export default function RegistrationPage() {
 
         if (!firstName || firstName.length > 10) {
             errors.push('Name must have a maximum of 10 characters.');
-        }
-        if (!phonePattern.test(phoneNumber)) {
-            errors.push('The number entered is incorrect');
         }
         if (!emailPattern.test(email)){
             alert(' Make sure the email contains "@" and a domain.');
@@ -73,16 +69,7 @@ export default function RegistrationPage() {
                         value={firstName}
                         onChangeText={setFirstName} />
                 </View>
-                <Text style={styles.inputLabel}>Enter your cell phone number:</Text>
-                <View style={styles.textBox}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Number"
-                        value={phoneNumber}
-                        onChangeText={setPhoneNumber}
-                        keyboardType="phone-pad" />
-                </View>
-
+    
                 <Text style={styles.inputLabel}>Enter your Faculty:</Text>
                 <View style={styles.textBox}>
                     <TextInput
