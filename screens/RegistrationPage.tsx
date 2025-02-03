@@ -27,28 +27,44 @@ export default function RegistrationPage() {
         navigation.navigate('Home'); // Navigate to the Home page
 
     }
-    
+    // Validations
     const validateInput = () => {
         let errors = [];
         const namePattern = /^[A-Za-z]+$/;
-        const phonePattern = /^\d{10}$/;
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (!firstName || firstName.length > 10) {
-            errors.push('Name must have a maximum of 10 characters.');
+        //Check if all fields are filled 
+        if (!firstName) {
+            errors.push('Please fill in your username.');
         }
-        if (!emailPattern.test(email)){
-            alert(' Make sure the email contains "@" and a domain.');
-            return;
+        if (!faculty) {
+            errors.push('Please fill in your faculty.');
+        }
+        if (!email) {
+            errors.push('Please fill in your email.');
         }
         if (!password) {
             errors.push('Please complete the password!');
         }
-        if (password !== confirmPassword) {
-            errors.push('Passwords do not match.');
+        if (!confirmPassword) {
+            errors.push('Please confirm your password!');
         }
-        if (!namePattern.test(faculty)) {
-            errors.push('Only letters are allowed.');
+
+        //check the types of entries entered
+
+        if (errors.length === 0) {
+            if (firstName.length > 10) {
+                errors.push('Name must have a maximum of 10 characters.');
+            }
+            if (!emailPattern.test(email)) {
+                errors.push('Make sure the email contains "@" and a domain.');
+            }
+            if (password !== confirmPassword) {
+                errors.push('Passwords do not match.');
+            }
+            if (!namePattern.test(faculty)) {
+                errors.push('Only letters are allowed in the faculty field.');
+            }
         }
 
         return errors;
