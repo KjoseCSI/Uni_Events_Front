@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../RootStackParamList';
+import { RootStackParamList } from '../../RootStackParamList';
 
 //defining a new type = Define navigation properties, defines all routes and their parameters
 type LoginPageNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;

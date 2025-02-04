@@ -7,8 +7,8 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MainEvents from "../screens/Events/MainEvents";
 import MapScreen from "../screens/Map/MapScreen";
 import React from "react";
-import LoginPage from '../screens/LoginPage'
-import RegistrationPage from "../screens/RegistrationPage"
+import LoginPage from '../screens/Auth/LoginPage'
+import RegistrationPage from "../screens/Auth/RegistrationPage"
 import { createStackNavigator } from "@react-navigation/stack";
 import { EventDetails } from "../screens/Events/EventDetails";
 import { RootStackParamList } from "./navigationModel";
