@@ -1,49 +1,70 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Alert, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, Alert, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; //
+import { StackNavigationProp } from '@react-navigation/stack';//
+import { RootStackParamList } from '../RootStackParamList'; 
+
+type LoginPageNavigationProp = StackNavigationProp<RootStackParamList, 'Registration'>; //
 
 
 export default function RegistrationPage() {
     const [firstName, setFirstName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [faculty, setFaculty] = useState('');
+    const navigation = useNavigation<LoginPageNavigationProp>(); // 
 
-    // Field validationS
+
     // validation of complete fields.
-    const handleLogin = () => {
+    const handleRegistration = () => {
         const errors = validateInput();
         if (errors.length > 0) {
             Alert.alert('Error', errors.join('\n'));
             return;
         }
         Alert.alert('Success', 'Your information has been successfully registered. Logging in...');
+        navigation.navigate('Home'); // Navigate to the Home page
 
     }
+    // Validations
     const validateInput = () => {
         let errors = [];
         const namePattern = /^[A-Za-z]+$/;
-        const phonePattern = /^\d{10}$/;
-        const emailPattern = /^[^\s@] + @[^\s@]+ \.[^\s@] + $/;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (!firstName || firstName.length > 10) {
-            errors.push('Name must have a maximum of 10 characters.');
+        //Check if all fields are correct. 
+        if (!firstName) {
+            errors.push('Please fill in your username.');
         }
-        if (!phonePattern.test(phoneNumber)) {
-            errors.push('The number entered is incorrect');
+        if (!faculty) {
+            errors.push('Please fill in your faculty.');
         }
-        if (!emailPattern.test(email)) {
-            errors.push('Invalid email.');
+        if (!email) {
+            errors.push('Please fill in your email.');
         }
         if (!password) {
             errors.push('Please complete the password!');
         }
-        if (password !== confirmPassword) {
-            errors.push('Passwords do not match.');
+        if (!confirmPassword) {
+            errors.push('Please confirm your password!');
         }
-        if (!namePattern.test(faculty)) {
-            errors.push('Only letters are allowed.');
+
+        //check the types of entries entered
+
+        if (errors.length === 0) {
+            if (firstName.length > 10) {
+                errors.push('Name must have a maximum of 10 characters.');
+            }
+            if (!emailPattern.test(email)) {
+                errors.push('Make sure the email contains "@" and a domain.');
+            }
+            if (password !== confirmPassword) {
+                errors.push('Passwords do not match.');
+            }
+            if (!namePattern.test(faculty)) {
+                errors.push('Only letters are allowed in the faculty field.');
+            }
         }
 
         return errors;
@@ -64,16 +85,7 @@ export default function RegistrationPage() {
                         value={firstName}
                         onChangeText={setFirstName} />
                 </View>
-                <Text style={styles.inputLabel}>Enter your cell phone number:</Text>
-                <View style={styles.textBox}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Number"
-                        value={phoneNumber}
-                        onChangeText={setPhoneNumber}
-                        keyboardType="phone-pad" />
-                </View>
-
+    
                 <Text style={styles.inputLabel}>Enter your Faculty:</Text>
                 <View style={styles.textBox}>
                     <TextInput
@@ -117,9 +129,9 @@ export default function RegistrationPage() {
                 </View>
             </View>
             <View style={styles.Boton}>
-                <TouchableOpacity style={styles.boxButton} onPress={handleLogin}>
+                <TouchableOpacity style={styles.boxButton} onPress={handleRegistration}>
                     <Text style={styles.TextButton}>
-                        Sing In
+                        Register
                     </Text>
                 </TouchableOpacity>
             </View>
