@@ -80,6 +80,12 @@ export default function Navigation() {
         <NavigationContainer>
         <RootStack.Navigator
         id={undefined}>
+
+            <RootStack.Screen
+            name="Main"
+            component={MyTabs}
+            options={{ headerShown: false }}
+            />
             <RootStack.Group screenOptions={{ presentation: "modal" }}>
             <RootStack.Screen
                 name="EventDetails"
@@ -87,12 +93,6 @@ export default function Navigation() {
                 options={{ title: "Detalles del Evento" }}
             />
             </RootStack.Group>
-
-            <RootStack.Screen
-            name="Main"
-            component={MyTabs}
-            options={{ headerShown: false }}
-            />
         </RootStack.Navigator>
         </NavigationContainer>
 

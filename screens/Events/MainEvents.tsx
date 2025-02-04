@@ -29,8 +29,8 @@ export default function MainEvents() {
   }
 
   function nextUser() {
-    const nextIndex = events.length - 2 === currentIndex ? 0 : currentIndex + 1
-    setCurrentIndex(nextIndex)
+    const nextIndex = currentIndex === events.length - 2 ? 0 : currentIndex + 1;
+    setCurrentIndex(nextIndex);
   }
 
   return (
