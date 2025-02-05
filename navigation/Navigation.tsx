@@ -76,7 +76,7 @@ function TabsApp() {
 
 function AuthStack(){
     return(
-<NavigationContainer>
+
       <RootStack.Navigator
       id={undefined}>
         <RootStack.Screen name="LoginPage" component={LoginPage} />
@@ -91,7 +91,7 @@ function AuthStack(){
         }}
         />
       </RootStack.Navigator>
-    </NavigationContainer>
+
     )
 }
 
