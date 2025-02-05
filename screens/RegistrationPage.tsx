@@ -23,7 +23,7 @@ export default function RegistrationPage() {
             Alert.alert('Error', errors.join('\n'));
             return;
         }
-        Alert.alert('Success', 'Your information has been successfully registered. Logging in...');
+        Alert.alert('Success', 'Your information has been registered. Logging in...');
         navigation.navigate('Home'); // Navigate to the Home page
 
     }
