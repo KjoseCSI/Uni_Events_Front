@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from "../../firebaseConfig";
+import { useAuthContext } from "../../context/AuthContext";
+
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigation = useNavigation(); // 
+
+    const {logingEmailWithPassword} = useAuthContext()
 
     //input parameter validation
     const handleLogin = async () => {
@@ -21,9 +27,14 @@ export default function LoginPage() {
             return;
         }
         Alert.alert('Iniciando sesión', 'Accediendo...');
-        navigation.navigate('MainEvents'); //Navigate to the Home page  
-        
 
+        try {
+            await signInWithEmailAndPassword(auth, email, password); // Call to Firebase for verification
+            logingEmailWithPassword(email,password);
+          } catch (error) {
+            console.error(error);
+            Alert.alert('Error usuario o contraseña mal ingresados'); 
+          }
     }
 
     // Navigate to the Registration page
