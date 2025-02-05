@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, Alert, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; //
-import { StackNavigationProp } from '@react-navigation/stack';//
-import { RootStackParamList } from '../RootStackParamList'; 
-
-type LoginPageNavigationProp = StackNavigationProp<RootStackParamList, 'Registration'>; //
 
 
 export default function RegistrationPage() {
@@ -13,7 +9,7 @@ export default function RegistrationPage() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [faculty, setFaculty] = useState('');
-    const navigation = useNavigation<LoginPageNavigationProp>(); // 
+    const navigation = useNavigation(); // 
 
 
     // validation of complete fields.
@@ -22,10 +18,11 @@ export default function RegistrationPage() {
         if (errors.length > 0) {
             Alert.alert('Error', errors.join('\n'));
             return;
-        }
-        Alert.alert('Success', 'Your information has been registered. Logging in...');
-        navigation.navigate('Home'); // Navigate to the Home page
 
+        }
+        Alert.alert('Success', 'Your information has been successfully registered. Logging in...');
+            navigation.navigate('MainEvents'); // Navegar a la página de registro
+     
     }
     // Validations
     const validateInput = () => {
@@ -33,7 +30,7 @@ export default function RegistrationPage() {
         const namePattern = /^[A-Za-z]+$/;
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        //Check if all fields are filled 
+        //Check if all fields are correct. 
         if (!firstName) {
             errors.push('Please fill in your username.');
         }

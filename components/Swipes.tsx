@@ -5,7 +5,7 @@ import { RectButton } from "react-native-gesture-handler";
 import { SwipeableImage } from './SwipeableImage';
 
 
-export function Swipes({users, currentIndex, handleLike, handlePass,}) {
+export function Swipes({ data, currentIndex, handleLike, handlePass,}) {
     
 
 
@@ -13,7 +13,7 @@ export function Swipes({users, currentIndex, handleLike, handlePass,}) {
     function RightAction() {
         return(
             <RectButton style={styles.container} >
-                <SwipeableImage user={users[currentIndex + 1]} ></SwipeableImage>
+                <SwipeableImage data={data[currentIndex + 1]} ></SwipeableImage>
             </RectButton>
         )
     }
@@ -21,7 +21,7 @@ export function Swipes({users, currentIndex, handleLike, handlePass,}) {
     function LeftAction() {
         return(
             <RectButton style={styles.container} >
-                <SwipeableImage user={users[currentIndex + 1]} ></SwipeableImage>
+                <SwipeableImage data={data[currentIndex + 1]} ></SwipeableImage>
             </RectButton>
         )
     }
@@ -42,7 +42,7 @@ export function Swipes({users, currentIndex, handleLike, handlePass,}) {
         console.log('open', dir);
       }}
     >
-        <SwipeableImage user={users[currentIndex]} ></SwipeableImage>
+        <SwipeableImage data={data[currentIndex]} ></SwipeableImage>
     </ReanimatedSwipeable>
   )
 }

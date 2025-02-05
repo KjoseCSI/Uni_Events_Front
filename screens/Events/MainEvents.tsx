@@ -1,18 +1,22 @@
 import { Text, View, StyleSheet, Alert } from 'react-native'
-import React, { Component, useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Topbar } from '../../components/Topbar'
 import Searchinput from '../../components/Searchinput'
-import BottonBar from '../../components/BottonBar'
-import { SwipeableImage } from "../../components/SwipeableImage";
-import  {useFetchUsers}  from "../../services/RandomUserAPI"
 import { Swipes } from '../../components/Swipes'
-import { GyroscopeSensor } from "../../components/GyroscopeSensor";
 import { AccelerometerSensor } from '../../components/AccelerometerSensor'
+import { LinearGradient } from 'expo-linear-gradient';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useEventsContext } from "../../hooks/useEventsContext";
+import { Button } from 'react-native-paper';
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function MainEvents() {
-  const { users, error, fetchUser } = useFetchUsers(); 
+  const { events, error } = useEventsContext(); 
   const [currentIndex, setCurrentIndex] = useState(0)
+  const navigation = useNavigation();
+
 
   function handleLike() {
     console.log('like')
@@ -25,24 +29,32 @@ export default function MainEvents() {
   }
 
   function nextUser() {
-    const nextIndex = users.length - 2 === currentIndex ? 0 : currentIndex + 1
-    setCurrentIndex(nextIndex)
+    const nextIndex = currentIndex === events.length - 2 ? 0 : currentIndex + 1;
+    setCurrentIndex(nextIndex);
   }
 
   return (
     <SafeAreaView style={styles.container} >
+    <LinearGradient
+    colors={['#004771', '#CC0000']}
+    style={styles.background}
+    />
+    <GestureHandlerRootView>
+    <SafeAreaView style={styles.subContainer} >
       <Topbar/>
       <Searchinput label={'Buscar Evento ...'} />
       <View style={styles.swipes}>
         {
-        users.length > 1 && 
-        users.map((u,i) => currentIndex === i && (
-        <Swipes key={i} users={users} currentIndex={currentIndex} handleLike={handleLike} handlePass={handlePass} />
+        events.length > 1 && 
+        events.map((u,i) => currentIndex === i && (
+        <Swipes key={i} data={events} currentIndex={currentIndex} handleLike={handleLike} handlePass={handlePass} />
         ) ) 
         }
       </View>
+      <Button mode='contained' onPress={() => navigation.navigate('EventDetails',{currentIndex})}>Detalles</Button>
       <AccelerometerSensor handleLike={handleLike} handlePass={handlePass} />
-      <BottonBar/>
+    </SafeAreaView>
+      </GestureHandlerRootView>
     </SafeAreaView>
   )
 }
@@ -50,6 +62,11 @@ export default function MainEvents() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#CC0000',
+  },
+  subContainer: {
+    flex: 1,
+    /* backgroundColor: '#004771', */
   },
 swipes: {
   flex: 1,
@@ -64,4 +81,12 @@ swipes: {
   shadowRadius: 4.65,
   elevation: 7,
 },
+background: {
+  position: 'absolute',
+  left: 0,
+  right: 0,
+  top: 0,
+  height: '100%',
+},
+
 })
