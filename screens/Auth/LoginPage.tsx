@@ -36,7 +36,7 @@ export default function LoginPage() {
     return (
         <View style={styles.container}>
 
-            <Image style={styles.icon} source={require('../assets/icon.png')} />
+            <Image style={styles.icon} source={require('../../assets/icon.png')} />
             <Text style={styles.TitleText}>Welcome</Text>
 
             <View style={styles.Card}>
