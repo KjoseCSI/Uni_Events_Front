@@ -1,6 +1,6 @@
 export type RootStackParamList = {
     //Pages
     Login: undefined;
-    Home: undefined; 
+    MainEvents: undefined; 
     Registration: undefined; 
   };
