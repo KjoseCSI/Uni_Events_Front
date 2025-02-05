@@ -83,20 +83,20 @@ function AuthStack(){
         <RootStack.Screen name="RegistrationPage" component={RegistrationPage}
 
           //transitions when opening and closing the screen.
-          options={{
+        options={{
             transitionSpec: {
-              open: config,
-              close: config,
+                open: AnimationConfig,
+                close: AnimationConfig,
             },
-          }}
+        }}
         />
       </RootStack.Navigator>
     </NavigationContainer>
     )
 }
 
-const config = {
-    animation: "spring",
+const AnimationConfig = {
+    animation: "spring" as const,
     config: {
         stiffness: 1000,
         damping: 500,
