@@ -22,6 +22,7 @@ export default function LoginPage() {
         }
         Alert.alert('Iniciando sesión', 'Accediendo...');
         navigation.navigate('MainEvents'); //Navigate to the Home page  
+        
 
     }
 
