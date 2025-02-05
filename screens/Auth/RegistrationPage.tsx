@@ -2,7 +2,9 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, Alert, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; //
-
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from "../../firebaseConfig";
+import { useAuthContext } from '../../context/AuthContext';
 
 export default function RegistrationPage() {
     const [firstName, setFirstName] = useState('');
@@ -10,21 +12,34 @@ export default function RegistrationPage() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [faculty, setFaculty] = useState('');
+    
     const navigation = useNavigation(); // 
+    const {logingEmailWithPassword} = useAuthContext();
 
 
     // validation of complete fields.
-    const handleRegistration = () => {
-        const errors = validateInput();
-        if (errors.length > 0) {
-            Alert.alert('Error', errors.join('\n'));
-            return;
+const handleRegistration = async () => {
+    const errors = validateInput();
 
-        }
-        Alert.alert('Success', 'Your information has been successfully registered. Logging in...');
-            navigation.navigate('MainEvents'); // Navegar a la página de registro
-     
+    if (errors.length > 0) {
+        Alert.alert('Error', errors.join('\n'));
+        return;
     }
+
+    Alert.alert('Success', 'Your information has been successfully registered. Logging in...');
+        
+        
+    try {
+        // Crear un nuevo usuario con email y contraseña
+        await createUserWithEmailAndPassword(auth, email, password);
+        Alert.alert('Registro Exitoso', `Bienvenido/a ${firstName}!`);
+        logingEmailWithPassword(email,password);
+        } catch (error) {
+        console.error(error);
+        Alert.alert('Error', error.message); // Muestra un mensaje de error si falla el registro
+    }
+
+}
     // Validations
     const validateInput = () => {
         let errors = [];

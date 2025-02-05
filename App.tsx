@@ -1,12 +1,14 @@
-import { createStackNavigator } from '@react-navigation/stack';
 import Navigation from './navigation/Navigation';
 import { EventsProvider } from './context/EventsContext';
+import { AuthProvider } from './context/AuthContext';
 
 export default function App() {
   return (
-    <EventsProvider>
-      <Navigation />
-    </EventsProvider>
+    <AuthProvider>
+      <EventsProvider>
+        <Navigation />
+      </EventsProvider>
+    </AuthProvider>
   );  
 }
 

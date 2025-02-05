@@ -11,6 +11,7 @@ import MapScreen from "../screens/Map/MapScreen";
 import React, { useState } from "react";
 import LoginPage from '../screens/Auth/LoginPage'
 import RegistrationPage from "../screens/Auth/RegistrationPage"
+import { useAuthContext } from "../context/AuthContext";
 
 
 const Tab = createBottomTabNavigator();
@@ -49,14 +50,14 @@ function TabsApp() {
                     /> 
                 )
             }}/>
-            <Tab.Screen 
+            {/* <Tab.Screen 
             name="Nuevo Usuario"
             component={LoginPage}
             options={{
                 tabBarIcon: ({focused ,color, size}) =>(
                     <AntDesign name="adduser" size={24} color="black" />
-                    /* <MaterialCommunityIcons name="google-maps" size={24} color="white"
-                    /> */
+                    <MaterialCommunityIcons name="google-maps" size={24} color="white"
+                    />
                 )
             }}/>
             <Tab.Screen 
@@ -65,10 +66,10 @@ function TabsApp() {
             options={{
                 tabBarIcon: ({focused ,color, size}) =>(
                     <AntDesign name="login" size={24} color="black" />
-                    /* <AntDesign name="team" size={24} color="white"
-                    /> */
+                    <AntDesign name="team" size={24} color="white"
+                    />
                 )
-            }}/>
+            }}/> */}
         </Tab.Navigator>
 
     )
@@ -108,21 +109,15 @@ const AnimationConfig = {
 };
 
 export default function Navigation() {
-    const [isSignedIn,setIsSignedIn] = useState(null);
+
+    const {state} = useAuthContext()
+
     return(
         
         <NavigationContainer>
         <RootStack.Navigator
         id={undefined}>
-            {isSignedIn == null ? (
-                <>
-                    <RootStack.Screen
-                        name="AuthScreens"
-                        component={AuthStack}
-                        options={{ headerShown: false }}
-                    />
-                </>
-            ) : (
+            {state === 1 ? (
                 <>
                     <RootStack.Screen
                         name="MainScreens"
@@ -136,6 +131,14 @@ export default function Navigation() {
                         options={{ title: "Detalles del Evento" }}
                     />
                     </RootStack.Group>
+                </>
+            ) : (
+                <>
+                <RootStack.Screen
+                    name="AuthScreens"
+                    component={AuthStack}
+                    options={{ headerShown: false }}
+                />
                 </>
             )}
         </RootStack.Navigator>
