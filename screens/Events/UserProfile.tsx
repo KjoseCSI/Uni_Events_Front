@@ -11,7 +11,6 @@ export default function UserProfile() {
                 <Image source={require('../../assets/icon-user.png')}
                     style={styles.profileImage} resizeMode="contain"
                 />
-
                 <Text style={styles.name}>José Chicaiza</Text>
                 <Text style={styles.email}>jrchicaizav@uce.edu.ec</Text>
                 <Text style={styles.boldText}>Estudiante:</Text>
