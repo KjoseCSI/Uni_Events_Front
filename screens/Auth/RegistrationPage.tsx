@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, Alert, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; //
-import { StackNavigationProp } from '@react-navigation/stack';//
-import { RootStackParamList } from '../../RootStackParamList'; 
-
-type LoginPageNavigationProp = StackNavigationProp<RootStackParamList, 'Registration'>; //
 
 
 export default function RegistrationPage() {
@@ -13,7 +9,7 @@ export default function RegistrationPage() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [faculty, setFaculty] = useState('');
-    const navigation = useNavigation<LoginPageNavigationProp>(); // 
+    const navigation = useNavigation(); // 
 
 
     // validation of complete fields.
@@ -24,7 +20,7 @@ export default function RegistrationPage() {
             return;
         }
         Alert.alert('Success', 'Your information has been successfully registered. Logging in...');
-        navigation.navigate('Home'); // Navigate to the Home page
+        navigation.navigate('MainEvents'); // Navigate to the Home page
 
     }
     // Validations

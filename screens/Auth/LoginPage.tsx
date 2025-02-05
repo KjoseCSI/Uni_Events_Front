@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../RootStackParamList';
-
-//defining a new type = Define navigation properties, defines all routes and their parameters
-type LoginPageNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigation = useNavigation<LoginPageNavigationProp>(); // 
+    const navigation = useNavigation(); // 
 
     //input parameter validation
     const handleLogin = async () => {
@@ -26,13 +21,13 @@ export default function LoginPage() {
             return;
         }
         Alert.alert('Iniciando sesión', 'Accediendo...');
-        navigation.navigate('Home'); //Navigate to the Home page  
+        navigation.navigate('MainEvents'); //Navigate to the Home page  
 
     }
 
     // Navigate to the Registration page
     const handleRegister = () => {
-        navigation.navigate('Registration'); // Navegar a la página de registro
+        navigation.navigate('RegistrationPage');
     };
 
 

@@ -1,6 +1,7 @@
 
 export type RootStackParamList = {
-    Main: undefined,
+    MainScreens: undefined,
+    AuthScreens: undefined,
     MainEvents: undefined; 
     EventDetails: { currentIndex: number }; 
     MapScreen: undefined;
