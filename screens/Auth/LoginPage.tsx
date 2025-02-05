@@ -1,25 +1,37 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigation = useNavigation(); // 
 
-    const handleLogin = () => {
-        //Validate if fields are empty
+    //input parameter validation
+    const handleLogin = async () => {
+
         if (!email || !password) {
-            alert('Please enter your email and password.');
+            Alert.alert('Error', 'Please enter your email and password.');
             return;
         }
         //Validate email format
-        const emailPattern =/^[^\s@] + @[^\s@]+ \.[^\s@] + $/ ; 
-        if (!emailPattern.test(email)){
-            alert('Email or password entered incorrectly. Make sure the email contains "@" and a domain.');
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            Alert.alert('Error', 'Email or password entered incorrectly. Make sure the email contains "@" and a domain.');
             return;
         }
-        //If you entered both fields correctly, login message
-        alert(`Logging in with ${email}`);
+        Alert.alert('Iniciando sesión', 'Accediendo...');
+        navigation.navigate('MainEvents'); //Navigate to the Home page  
+        
+
+    }
+
+    // Navigate to the Registration page
+    const handleRegister = () => {
+        navigation.navigate('RegistrationPage');
     };
+
+
 
     return (
         <View style={styles.container}>
@@ -35,7 +47,7 @@ export default function LoginPage() {
                         style={styles.input}
                         placeholder="email@uce.edu.ec"
                         value={email}
-                        onChangeText={setEmail}
+                        onChangeText={(text) => setEmail(text)}
                         keyboardType="email-address"
                         autoCapitalize="none"
                     />
@@ -47,7 +59,7 @@ export default function LoginPage() {
                         style={styles.input}
                         placeholder="Password"
                         value={password}
-                        onChangeText={setPassword}
+                        onChangeText={(text) => setPassword(text)}
                         secureTextEntry
                     />
                 </View>
@@ -63,9 +75,9 @@ export default function LoginPage() {
 
             <View>
                 <Text style={styles.input}>
-                    Don't have an account?    . 
-                    <TouchableOpacity > 
-                       <Text style={styles.link}>Register here</Text>
+                    Don't have an account?    .
+                    <TouchableOpacity onPressIn={handleRegister}>
+                        <Text style={styles.link}>Register here</Text>
                     </TouchableOpacity>
                 </Text>
                 <Button title=
@@ -119,12 +131,12 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         borderRadius: 10,
         fontWeight: 'bold',
-        
+
     },
     Boton: {
         alignItems: 'center',
     },
-    boxButton:{
+    boxButton: {
         backgroundColor: '#003366',
         borderRadius: 30,
         paddingVertical: 20,

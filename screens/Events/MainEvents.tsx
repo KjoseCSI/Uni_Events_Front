@@ -29,8 +29,8 @@ export default function MainEvents() {
   }
 
   function nextUser() {
-    const nextIndex = events.length - 2 === currentIndex ? 0 : currentIndex + 1
-    setCurrentIndex(nextIndex)
+    const nextIndex = currentIndex === events.length - 2 ? 0 : currentIndex + 1;
+    setCurrentIndex(nextIndex);
   }
 
   return (
@@ -51,7 +51,7 @@ export default function MainEvents() {
         ) ) 
         }
       </View>
-      <Button onPress={() => navigation.navigate('EventDetails',{currentIndex})}>Detalles</Button>
+      <Button mode='contained' onPress={() => navigation.navigate('EventDetails',{currentIndex})}>Detalles</Button>
       <AccelerometerSensor handleLike={handleLike} handlePass={handlePass} />
     </SafeAreaView>
       </GestureHandlerRootView>
@@ -88,4 +88,5 @@ background: {
   top: 0,
   height: '100%',
 },
+
 })

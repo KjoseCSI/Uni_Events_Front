@@ -2,22 +2,22 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs"
 import {NavigationContainer} from "@react-navigation/native"
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-
-//screens
-import MainEvents from "../screens/Events/MainEvents";
-import MapScreen from "../screens/Map/MapScreen";
-import React from "react";
-import LoginPage from '../screens/LoginPage'
-import RegistrationPage from "../screens/RegistrationPage"
 import { createStackNavigator } from "@react-navigation/stack";
 import { EventDetails } from "../screens/Events/EventDetails";
 import { RootStackParamList } from "./navigationModel";
+//screens
+import MainEvents from "../screens/Events/MainEvents";
+import MapScreen from "../screens/Map/MapScreen";
+import React, { useState } from "react";
+import LoginPage from '../screens/Auth/LoginPage'
+import RegistrationPage from "../screens/Auth/RegistrationPage"
+
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator<RootStackParamList>();
 
 
-function MyTabs() {
+function TabsApp() {
     return(
 
         <Tab.Navigator
@@ -74,25 +74,70 @@ function MyTabs() {
     )
 }
 
-export default function Navigation() {
+function AuthStack(){
     return(
+<NavigationContainer>
+      <RootStack.Navigator
+      id={undefined}>
+        <RootStack.Screen name="LoginPage" component={LoginPage} />
+        <RootStack.Screen name="RegistrationPage" component={RegistrationPage}
 
+          //transitions when opening and closing the screen.
+        options={{
+            transitionSpec: {
+                open: AnimationConfig,
+                close: AnimationConfig,
+            },
+        }}
+        />
+      </RootStack.Navigator>
+    </NavigationContainer>
+    )
+}
+
+const AnimationConfig = {
+    animation: "spring" as const,
+    config: {
+        stiffness: 1000,
+        damping: 500,
+        mass: 3,
+        overshootClamping: true,
+        restDisplacementThreshold: 0.01,
+        restSpeedThreshold: 0.01,
+    },
+};
+
+export default function Navigation() {
+    const [isSignedIn,setIsSignedIn] = useState(null);
+    return(
+        
         <NavigationContainer>
         <RootStack.Navigator
         id={undefined}>
-            <RootStack.Group screenOptions={{ presentation: "modal" }}>
-            <RootStack.Screen
-                name="EventDetails"
-                component={EventDetails}
-                options={{ title: "Detalles del Evento" }}
-            />
-            </RootStack.Group>
-
-            <RootStack.Screen
-            name="Main"
-            component={MyTabs}
-            options={{ headerShown: false }}
-            />
+            {isSignedIn == null ? (
+                <>
+                    <RootStack.Screen
+                        name="AuthScreens"
+                        component={AuthStack}
+                        options={{ headerShown: false }}
+                    />
+                </>
+            ) : (
+                <>
+                    <RootStack.Screen
+                        name="MainScreens"
+                        component={TabsApp}
+                        options={{ headerShown: false }}
+                    />
+                    <RootStack.Group screenOptions={{ presentation: "modal" }}>
+                    <RootStack.Screen
+                        name="EventDetails"
+                        component={EventDetails}
+                        options={{ title: "Detalles del Evento" }}
+                    />
+                    </RootStack.Group>
+                </>
+            )}
         </RootStack.Navigator>
         </NavigationContainer>
 

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import MapView, {Marker, Polyline} from 'react-native-maps';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MapViewDirections from 'react-native-maps-directions';
-import { GOOGLE_MAPS_KEY } from ".env";
+import { GOOGLE_MAPS_KEY } from "@env";
 
 
 export default function MapComponentView() {
@@ -48,12 +48,6 @@ export default function MapComponentView() {
         origin={origin}
         destination={destination}
         apikey={GOOGLE_MAPS_KEY}
-        strokeColor='blue'
-        strokeWidth={8}
-        />
-
-        <Polyline
-        coordinates={[origin, destination]}
         strokeColor='blue'
         strokeWidth={8}
         />

@@ -6,7 +6,7 @@ import { useEventsContext } from "../../hooks/useEventsContext";
 import { RouteProp } from '@react-navigation/native';
 
 type RootStackParamList = {
-  EventDetail: { currentIndex: number }; // Define los parámetros esperados
+  EventDetail: { currentIndex: number }; 
 };
 
 type EventDetailRouteProp = RouteProp<RootStackParamList, 'EventDetail'>;
@@ -42,8 +42,11 @@ export function EventDetails({ route }: { route: EventDetailRouteProp }) {
     <SafeAreaView>
       <Image source={{ uri: `${events[currentIndex].event_photo.url}` } } style={styles.photo} />
       <View>
-        {/* <Text>{events[currentIndex].event_date}</Text>
-        <Text></Text> */}
+        <Text>
+          {events[currentIndex]?.event_date
+            ? events[currentIndex].event_date.toLocaleString()
+            : 'Fecha no disponible'}
+        </Text>
       </View>
       <Button 
       icon="share-variant-outline" 
