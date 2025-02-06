@@ -41,7 +41,7 @@ export default function UserProfile() {
             "Elige una opcion:",
             [
                 { text: "Tomar una foto",
-                  onPress: takePhoto
+                onPress: takePhoto
                 },
                 {text: "Seleccionar de galeria",
                 onPress: pickImage

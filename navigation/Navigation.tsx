@@ -5,14 +5,15 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { createStackNavigator } from "@react-navigation/stack";
 import { EventDetails } from "../screens/Events/EventDetails";
 import { RootStackParamList } from "./navigationModel";
+import { useAuthContext } from "../context/AuthContext";
 //screens
 import MainEvents from "../screens/Events/MainEvents";
 import MapScreen from "../screens/Map/MapScreen";
-import React, { useState } from "react";
-import LoginPage from '../screens/Auth/LoginPage'
-import RegistrationPage from "../screens/Auth/RegistrationPage"
-import { useAuthContext } from "../context/AuthContext";
-
+import UserProfile from "../screens/Events/UserProfile";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import React from "react";
+import LoginPage from "../screens/Auth/LoginPage";
+import RegistrationPage from "../screens/Auth/RegistrationPage";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -50,17 +51,16 @@ function TabsApp() {
                     /> 
                 )
             }}/>
-            {/* <Tab.Screen 
-            name="Nuevo Usuario"
-            component={LoginPage}
+            <Tab.Screen 
+            name="Usuario"
+            component={UserProfile}
             options={{
                 tabBarIcon: ({focused ,color, size}) =>(
-                    <AntDesign name="adduser" size={24} color="black" />
-                    <MaterialCommunityIcons name="google-maps" size={24} color="white"
+                    <MaterialCommunityIcons name="clipboard-account" size={24} color="white"
                     />
                 )
             }}/>
-            <Tab.Screen 
+            {/* <Tab.Screen 
             name="Perfil"
             component={RegistrationPage}
             options={{
