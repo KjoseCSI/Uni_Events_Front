@@ -1,9 +1,18 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function UserProfile() {
+
+    //Create const to chages users image
+    const [image, setImage] = useState<string | null>(null);
+    const pickImage = async () => {
+        
+    }
+
+    
+
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Perfil de usuario</Text>
