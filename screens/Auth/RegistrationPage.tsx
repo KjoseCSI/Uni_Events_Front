@@ -26,7 +26,7 @@ export default function RegistrationPage() {
         try {
             // Crear un nuevo usuario con email y contraseña
             await createUserWithEmailAndPassword(auth, email, password);
-            Alert.alert('Registro Exitoso', `Bienvenido/a ${firstName}!`);
+            Alert.alert('Registro Exitoso', `Bienvenido ${firstName}!`);
             logingEmailWithPassword(email,password);
             } catch (error) {
             console.error(error);
@@ -42,35 +42,35 @@ export default function RegistrationPage() {
 
         //Check if all fields are correct. 
         if (!firstName) {
-            errors.push('Please fill in your username.');
+            errors.push('Por favor, ingrese su nombre de usuario.');
         }
         if (!faculty) {
-            errors.push('Please fill in your faculty.');
+            errors.push('Por favor, ingrese el nombre de su facultad.');
         }
         if (!email) {
-            errors.push('Please fill in your email.');
+            errors.push('Por favor, ingrese su correo electrónico.');
         }
         if (!password) {
-            errors.push('Please complete the password!');
+            errors.push('Por favor, ingresa una contraseña.');
         }
         if (!confirmPassword) {
-            errors.push('Please confirm your password!');
+            errors.push('Por favor, ingresa la confirmación de tu contraseña');
         }
 
         //check the types of entries entered
 
         if (errors.length === 0) {
-            if (firstName.length > 10) {
-                errors.push('Name must have a maximum of 10 characters.');
+            if (firstName.length > 20) {
+                errors.push('Nombre de Usuario inválido, su nombre debe tener un máximo de 20 letras.');
             }
             if (!emailPattern.test(email)) {
-                errors.push('Make sure the email contains "@" and a domain.');
+                errors.push('Asegúrese de que el correo electrónico contenga "@" y un dominio.');
             }
             if (password !== confirmPassword) {
-                errors.push('Passwords do not match.');
+                errors.push('Las contraseñas no coinciden. Intente de nuevo...');
             }
             if (!namePattern.test(faculty)) {
-                errors.push('Only letters are allowed in the faculty field.');
+                errors.push('Sólo se permite el ingreso de letras en el campo de Facultad.');
             }
         }
 
@@ -80,11 +80,11 @@ export default function RegistrationPage() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.TitleText}>User Registration</Text>
+            <Text style={styles.TitleText}>Registro de usuario</Text>
 
             <View style={styles.Card}>
 
-            <Text style={styles.inputLabel}>Enter your username:</Text>
+            <Text style={styles.inputLabel}>Ingrese su nombre y apellido:</Text>
                 <View style={styles.textBox}>
                     <TextInput
                         style={styles.input}
@@ -93,7 +93,7 @@ export default function RegistrationPage() {
                         onChangeText={setFirstName} />
                 </View>
     
-                <Text style={styles.inputLabel}>Enter your Faculty:</Text>
+                <Text style={styles.inputLabel}>Ingrese el nombre de tu Facultad:</Text>
                 <View style={styles.textBox}>
                     <TextInput
                         style={styles.input}
@@ -103,7 +103,7 @@ export default function RegistrationPage() {
                 </View>
 
 
-                <Text style={styles.inputLabel}>Enter your institutional email:</Text>
+                <Text style={styles.inputLabel}>Ingrese su correo electrónico institucional:</Text>
                 <View style={styles.textBox}>
                     <TextInput
                         style={styles.input}
@@ -114,7 +114,7 @@ export default function RegistrationPage() {
                         autoCapitalize="none" />
                 </View>
 
-                <Text style={styles.inputLabel}>Enter your password:</Text>
+                <Text style={styles.inputLabel}>Ingrese una contraseña:</Text>
                 <View style={styles.textBox}>
                     <TextInput
                         style={styles.input}
@@ -124,7 +124,7 @@ export default function RegistrationPage() {
                         secureTextEntry />
                 </View>
                 
-                <Text style={styles.inputLabel}>Confirm your password:</Text>
+                <Text style={styles.inputLabel}>Confirma tu contraseña:</Text>
                 <View style={styles.textBox}>
                     <TextInput
                         style={styles.input}
@@ -138,7 +138,7 @@ export default function RegistrationPage() {
             <View style={styles.Boton}>
                 <TouchableOpacity style={styles.boxButton} onPress={handleRegistration}>
                     <Text style={styles.TextButton}>
-                        Register
+                        Registrarse
                     </Text>
                 </TouchableOpacity>
             </View>
