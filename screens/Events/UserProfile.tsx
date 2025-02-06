@@ -2,16 +2,39 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
+import * as ImagePicker from 'expo-image-picker';
+import { Alert } from 'react-native';
 
 export default function UserProfile() {
 
     //Create const to chages users image
     const [image, setImage] = useState<string | null>(null);
+
+    //choose image from gallery
     const pickImage = async () => {
-        
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 4],
+            quality: 1,
+        });
+
+        if (!result.canceled && result.assets?.length > 0) {
+            setImage(result.assets[0].uri || null);
+        }
     }
 
-    
+    //take a photo with the camera
+    const takePhoto = async () => {
+        let result = await ImagePicker.launchCameraAsync({
+            allowsEditing: true,
+            aspect: [4, 4],
+            quality: 1,
+        });
+        if (!result.canceled && result.assets?.length > 0) {
+            setImage(result.assets[0].uri || null);
+        }
+    };
+
 
     return (
         <SafeAreaView style={styles.container}>
