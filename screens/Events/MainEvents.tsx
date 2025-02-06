@@ -51,7 +51,10 @@ export default function MainEvents() {
         ) ) 
         }
       </View>
-      <Button mode='contained' onPress={() => navigation.navigate('EventDetails',{currentIndex})}>Detalles</Button>
+      <Button 
+      buttonColor="#004771"
+      mode='contained' 
+      onPress={() => navigation.navigate('EventDetails',{currentIndex})}>Detalles</Button>
       <AccelerometerSensor handleLike={handleLike} handlePass={handlePass} />
     </SafeAreaView>
       </GestureHandlerRootView>

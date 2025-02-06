@@ -4,6 +4,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from 'react-native-paper';
 import { useEventsContext } from "../../hooks/useEventsContext";
 import { RouteProp } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 type RootStackParamList = {
   EventDetail: { currentIndex: number }; 
@@ -22,7 +24,8 @@ export function EventDetails({ route }: { route: EventDetailRouteProp }) {
     try {
       const result = await Share.share({
         message:
-          'React Native | A framework for building native apps using React',
+          `Hola te invito al Evento ${events[currentIndex].event_name} que sera el ${events[currentIndex].event_date} a la hora
+          ${events[currentIndex].event_time}`,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -39,14 +42,29 @@ export function EventDetails({ route }: { route: EventDetailRouteProp }) {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
+      <LinearGradient
+          colors={['#004771', '#CC0000']}
+          style={styles.background}
+          />
       <Image source={{ uri: `${events[currentIndex].event_photo.url}` } } style={styles.photo} />
-      <View>
-        <Text>
-          {events[currentIndex]?.event_date
-            ? events[currentIndex].event_date.toLocaleString()
-            : 'Fecha no disponible'}
-        </Text>
+      <View style={styles.footerContainer}>
+        <View style={styles.infoContainer}>
+          <MaterialIcons name="date-range" size={24} color="white" />
+          <Text style={styles.footerText}>
+            {events[currentIndex]?.event_date
+              ? events[currentIndex].event_date.toLocaleString()
+              : 'Fecha no disponible'}
+          </Text>
+        </View>
+        <View style={styles.infoContainer}>
+          <MaterialIcons name="access-time" size={24} color="white" />
+          <Text style={styles.footerText}>
+            {events[currentIndex]?.event_time
+              ? events[currentIndex].event_time.toLocaleString()
+              : 'Hora no disponible'}
+          </Text>
+        </View>
       </View>
       <Button 
       icon="share-variant-outline" 
@@ -56,16 +74,76 @@ export function EventDetails({ route }: { route: EventDetailRouteProp }) {
       onPress={onShare}>
         Comparte este Evento con tus amigos!!!
       </Button>
-      <Button onPress={() => navigation.goBack()}>Atras</Button>
+      <View>
+        <Text style={styles.title}>
+          {events[currentIndex].event_name}
+        </Text>
+        <Text style={styles.typeEvent}>
+          Tipe de Evento: {events[currentIndex].event_type}
+        </Text>
+        <Text style={styles.footerText}>
+          {events[currentIndex].event_description}
+        </Text>
+      </View>
+
+      <Button 
+      icon="arrow-left"
+      buttonColor="#004771"
+      textColor="white"
+      onPress={() => navigation.goBack()}>Atras</Button>
     </SafeAreaView>
 
   );
 };
 
 const styles = StyleSheet.create({
-    photo:{
-      height: '100%',
-      resizeMode: 'cover',
+  container: {
+    flex: 1,
+    backgroundColor: '#CC0000',
+    padding: 15
+  },  
+  photo:{
+      height: '50%',
+      /* resizeMode: 'cover', */
       borderRadius: 20,
     },
+    background: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      height: '100%',
+    },
+    footerContainer:{
+      flexDirection: "row",  
+      justifyContent: "space-between", 
+      alignItems: "center", 
+      paddingHorizontal: 10, 
+      marginTop: 10,
+    },
+    infoContainer: {
+      flexDirection: "row",  
+    alignItems: "center",
+    },
+    footerText:{
+      color:"white",
+      marginLeft: 5,
+      fontSize: 16,
+    },
+    title:{
+      color:"white",
+      textAlign: "center",
+      fontWeight: "bold" ,
+      fontSize: 30,
+      width: "100%",
+      margin: 10,
+      transform: [{ rotate: "-5deg" }],
+    },
+    typeEvent: {
+      color: "white",
+      textDecorationLine: "underline",
+      fontStyle: "italic",
+      fontSize: 22,
+      margin: 5
+    }
 });

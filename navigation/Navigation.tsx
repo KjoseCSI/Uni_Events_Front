@@ -79,10 +79,13 @@ function AuthStack(){
     return(
 
       <RootStack.Navigator
-      id={undefined}>
+      id={undefined}
+      screenOptions={{
+        headerShown: false,
+        }}>
         <RootStack.Screen name="LoginPage" component={LoginPage} />
         <RootStack.Screen name="RegistrationPage" component={RegistrationPage}
-
+        
           //transitions when opening and closing the screen.
         options={{
             transitionSpec: {
