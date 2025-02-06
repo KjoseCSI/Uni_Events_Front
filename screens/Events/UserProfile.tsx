@@ -34,7 +34,24 @@ export default function UserProfile() {
             setImage(result.assets[0].uri || null);
         }
     };
-
+    //main function to change the user image
+    const handleImagePick = () => {
+        Alert.alert(
+            "Seleccionar una imagen de usuario",
+            "Elige una opcion",
+            [
+                { text: "Tomar una foto",
+                  onPress: takePhoto
+                },
+                {text: "Seleccionar de galeria",
+                onPress: pickImage
+                },
+                {text: "Cancelar",
+                style: "cancel"
+                },
+            ]
+        )
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -98,7 +115,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fff',
         marginLeft: 30,
-        
+
     },
     email: {
         color: '#fff',
@@ -125,7 +142,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         marginLeft: 50,
         marginRight: 50,
-        
+
     },
     cardTitle: {
         fontWeight: 'bold',
@@ -133,7 +150,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         textAlign: 'center',
     },
-    cardText:{
+    cardText: {
         fontSize: 16,
     },
     button: {
