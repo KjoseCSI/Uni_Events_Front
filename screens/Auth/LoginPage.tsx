@@ -11,13 +11,13 @@ export default function LoginPage() {
     const handleLogin = async () => {
 
         if (!email || !password) {
-            Alert.alert('Error', 'Please enter your email and password.');
+            Alert.alert('Error', 'Por favor introduce tu correo electrónico y contraseña.');
             return;
         }
         //Validate email format
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(email)) {
-            Alert.alert('Error', 'Email or password entered incorrectly. Make sure the email contains "@" and a domain.');
+            Alert.alert('Error', 'Correo electrónico o contraseña ingresados ​​incorrectamente. Asegúrese de que el correo electrónico contenga "@" y un dominio.');
             return;
         }
         Alert.alert('Iniciando sesión', 'Accediendo...');
@@ -37,10 +37,10 @@ export default function LoginPage() {
         <View style={styles.container}>
 
             <Image style={styles.icon} source={require('../assets/icon.png')} />
-            <Text style={styles.TitleText}>Welcome</Text>
+            <Text style={styles.TitleText}>Bienvenido</Text>
 
             <View style={styles.Card}>
-                <Text style={styles.input}>Enter your institutional email:</Text>
+                <Text style={styles.input}>Ingresa tu correo electrónico institucional:</Text>
 
                 <View style={styles.textBox}>
                     <TextInput
@@ -53,7 +53,7 @@ export default function LoginPage() {
                     />
                 </View>
 
-                <Text style={styles.input}>Enter your password:</Text>
+                <Text style={styles.input}>Ingrese su contraseña:</Text>
                 <View style={styles.textBox}>
                     <TextInput
                         style={styles.input}
@@ -67,7 +67,7 @@ export default function LoginPage() {
                 <View style={styles.Boton}>
                     <TouchableOpacity style={styles.boxButton} onPress={handleLogin}>
                         <Text style={styles.TextButton}>
-                            Sing In
+                            Iniciar sesión
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -75,13 +75,13 @@ export default function LoginPage() {
 
             <View>
                 <Text style={styles.input}>
-                    Don't have an account?    .
+                    ¿No tienes una cuenta?    .
                     <TouchableOpacity onPressIn={handleRegister}>
-                        <Text style={styles.link}>Register here</Text>
+                        <Text style={styles.link}>Regístrate aquí</Text>
                     </TouchableOpacity>
                 </Text>
                 <Button title=
-                    "Continue with email" onPress={() => { }} />
+                    "Continuar con google" onPress={() => { }} />
             </View>
         </View>
     );
