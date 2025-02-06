@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, Alert, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; //
-
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from "../../firebaseConfig";
+import { useAuthContext } from '../../context/AuthContext';
 
 export default function RegistrationPage() {
     const [firstName, setFirstName] = useState('');
@@ -11,17 +13,26 @@ export default function RegistrationPage() {
     const [faculty, setFaculty] = useState('');
     const navigation = useNavigation(); // 
 
+    const {logingEmailWithPassword} = useAuthContext();
 
     // validation of complete fields.
-    const handleRegistration = () => {
+    const handleRegistration = async () => {
         const errors = validateInput();
         if (errors.length > 0) {
             Alert.alert('Error', errors.join('\n'));
             return;
 
         }
-        Alert.alert('Success', 'Your information has been successfully registered. Logging in...');
-            navigation.navigate('MainEvents'); // Navigate Page Mind
+        try {
+            // Crear un nuevo usuario con email y contraseña
+            await createUserWithEmailAndPassword(auth, email, password);
+            Alert.alert('Registro Exitoso', `Bienvenido/a ${firstName}!`);
+            logingEmailWithPassword(email,password);
+            } catch (error) {
+            console.error(error);
+            Alert.alert('Error', error.message); // Muestra un mensaje de error si falla el registro
+        }
+
     }
     // Validations
     const validateInput = () => {
