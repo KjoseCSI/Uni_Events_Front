@@ -1,22 +1,76 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
+import * as ImagePicker from 'expo-image-picker';
+import { Alert } from 'react-native';
 
 export default function UserProfile() {
+
+    //Create const to chages users image
+    const [image, setImage] = useState<string | null>(null);
+
+    //choose image from gallery
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 4],
+            quality: 1,
+        });
+
+        if (!result.canceled && result.assets?.length > 0) {
+            setImage(result.assets[0].uri || null);
+        }
+    };
+
+    //take a photo with the camera
+    const takePhoto = async () => {
+        let result = await ImagePicker.launchCameraAsync({
+            allowsEditing: true,
+            aspect: [4, 4],
+            quality: 1,
+        })
+        if (!result.canceled && result.assets?.length > 0) {
+            setImage(result.assets[0].uri || null);
+        }
+    };
+    //main function to change the user image
+    const handleImagePick = () => {
+        Alert.alert(
+            "Seleccione una imagen de usuario",
+            "Elige una opcion:",
+            [
+                { text: "Tomar una foto",
+                  onPress: takePhoto
+                },
+                {text: "Seleccionar de galeria",
+                onPress: pickImage
+                },
+                {text: "Cancelar",
+                style: "cancel"
+                },
+            ]
+        )
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Perfil de usuario</Text>
             <View style={styles.profileSection}>
-                <Image source={require('../../assets/icon-user.png')}
-                    style={styles.profileImage} resizeMode="contain"
+                <TouchableOpacity onPress={handleImagePick}> 
+                <Image 
+                source={ image ? {uri: image}: require('../../assets/icon-user.png')}
+                    style={styles.profileImage}
                 />
+                </TouchableOpacity>
+
                 <Text style={styles.name}>José Chicaiza</Text>
                 <Text style={styles.email}>jrchicaizav@uce.edu.ec</Text>
                 <Text style={styles.boldText}>Estudiante:</Text>
                 <Text style={styles.info}>Facultad de Psicología</Text>
                 <Text style={styles.info}>Carrera de psicopedagogía</Text>
             </View>
+
             <SafeAreaView style={styles.subContainer} >
                 <View style={styles.subContainer}>
                     <View style={styles.card}>
@@ -25,6 +79,7 @@ export default function UserProfile() {
                         <Text style={styles.cardText}>☑ Fiestas Quito FEUE</Text>
                         <Text style={styles.cardText}>☑ Centralazo</Text>
                     </View>
+                    
                     <TouchableOpacity style={styles.button}>
                         <Text style={styles.buttonText}>Enviar nuevo evento</Text>
                     </TouchableOpacity>
@@ -66,7 +121,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fff',
         marginLeft: 30,
-        
+
     },
     email: {
         color: '#fff',
@@ -93,7 +148,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         marginLeft: 50,
         marginRight: 50,
-        
+
     },
     cardTitle: {
         fontWeight: 'bold',
@@ -101,7 +156,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         textAlign: 'center',
     },
-    cardText:{
+    cardText: {
         fontSize: 16,
     },
     button: {
