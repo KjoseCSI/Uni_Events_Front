@@ -4,8 +4,11 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as ImagePicker from 'expo-image-picker';
 import { Alert } from 'react-native';
+import { useAuthContext } from '../../context/AuthContext';
 
 export default function UserProfile() {
+
+    const {showEmail} = useAuthContext();
 
     //Create const to chages users image
     const [image, setImage] = useState<string | null>(null);
@@ -65,7 +68,7 @@ export default function UserProfile() {
                 </TouchableOpacity>
 
                 <Text style={styles.name}>José Chicaiza</Text>
-                <Text style={styles.email}>jrchicaizav@uce.edu.ec</Text>
+                <Text style={styles.email}>{showEmail}</Text>
                 <Text style={styles.boldText}>Estudiante:</Text>
                 <Text style={styles.info}>Facultad de Psicología</Text>
                 <Text style={styles.info}>Carrera de psicopedagogía</Text>
