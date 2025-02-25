@@ -10,16 +10,41 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useEventsContext } from "../../hooks/useEventsContext";
 import { Button } from 'react-native-paper';
 import { useNavigation } from "@react-navigation/native";
-
+import { useSQLiteContext } from "expo-sqlite";
 
 export default function MainEvents() {
   const { events, error } = useEventsContext(); 
   const [currentIndex, setCurrentIndex] = useState(0)
   const navigation = useNavigation();
 
+  //database Functions
+
+  const database = useSQLiteContext();
+
+  const handleSave = async () => {
+    try {
+      const response = await database.runAsync(
+        `INSERT INTO eventslike (id, event_name, latitude, longitude, event_time, event_date, event_place)
+        VALUES (10, 'Festival de Jazz', -0.2295, -78.5243, '18:30', '2025-04-10', 'Teatro Nacional');`,
+          [
+            events[currentIndex].id, 
+            events[currentIndex].event_name, 
+            events[currentIndex].latitude,
+            events[currentIndex].longitude,
+            events[currentIndex].event_time,
+            events[currentIndex].event_date.toLocaleString(),
+            events[currentIndex].event_place
+          ]
+      );
+      console.log("Evento guardado Correctamente:", response?.changes!);
+    } catch (error) {
+      console.error("Error al guaradar el Evento:", error);
+    }
+  };
 
   function handleLike() {
     console.log('like')
+    handleSave()
     nextUser()
   }
 

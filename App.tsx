@@ -1,13 +1,18 @@
 import Navigation from './navigation/Navigation';
 import { EventsProvider } from './context/EventsContext';
 import { AuthProvider } from "./context/AuthContext";
+import { SQLiteProvider } from 'expo-sqlite';
+import {createDbIfNeeded} from './database/EventsDatabase';
+
 export default function App() {
   return (
-    <AuthProvider>
-      <EventsProvider>
-        <Navigation />
-      </EventsProvider>
-    </AuthProvider>
+    <SQLiteProvider databaseName="eventslike.db" onInit={createDbIfNeeded}>
+      <AuthProvider>
+        <EventsProvider>
+          <Navigation />
+        </EventsProvider>
+      </AuthProvider>
+    </SQLiteProvider>
   );  
 }
 

@@ -1,12 +1,27 @@
-import { useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 import MapView, {Marker, Polyline} from 'react-native-maps';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MapViewDirections from 'react-native-maps-directions';
 import { GOOGLE_MAPS_KEY } from "@env";
+import { useSQLiteContext } from "expo-sqlite";
+
+import { eventsLikeModel } from "../../models/LikeEventsModel"
 
 
 export default function MapComponentView() {
+
+  const [eventLikeData, setEventLikeData] = useState<eventsLikeModel[]>([]);
+  const eventDatabase = useSQLiteContext();
+  
+  const loadData = async () => {
+    const result = await eventDatabase.getAllAsync<eventsLikeModel>("SELECT * FROM eventslike");
+    setEventLikeData(result);
+  };
+  
+  useEffect(() => {
+    loadData();
+  }, []);
 
   const [ origin , setOrigin ] = useState({
     latitude: -0.1979804,
@@ -29,21 +44,32 @@ export default function MapComponentView() {
         longitudeDelta: 0.01,
       }}
       >
+        {eventLikeData.map((event) => (
+        <Fragment key={event.id}>
+        <Marker 
+          /* key = {event.id} */
+          coordinate={{
+          latitude: event.latitude,
+          longitude: event.longitude,
+        }}
+        title={event.event_name}
+        description={`Lugar: ${event.event_place}\nFecha: ${event.event_date}\nHora:${event.event_time}`}
+        />
+        <MapViewDirections
+        origin={origin}
+        destination={{ latitude: event.latitude, longitude: event.longitude }}
+        apikey={GOOGLE_MAPS_KEY}
+        strokeColor='blue'
+        strokeWidth={8}
+        />
+        </Fragment>
+      ))}
         <Marker
         coordinate={{
           latitude: origin.latitude,
           longitude: origin.longitude,
         }}
         />
-        <Marker
-        coordinate={{
-          latitude: destination.latitude,
-          longitude: destination.longitude,
-        }}
-        draggable
-        onDragEnd={(direction) => setDestination(direction.nativeEvent.coordinate)}
-        />
-
         <MapViewDirections
         origin={origin}
         destination={destination}
