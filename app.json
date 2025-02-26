@@ -26,6 +26,12 @@
     },
     "plugins": [
       "expo-sqlite"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d3e8af17-c1a1-40c0-a44d-02d4271ad091"
+      }
+    },
+    "owner": "jrchi"
   }
 }

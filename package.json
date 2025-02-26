@@ -22,12 +22,14 @@
     "@types/react-navigation": "^3.4.0",
     "axios": "^1.7.9",
     "expo": "~52.0.26",
-    "expo-constants": "~17.0.4",
+    "expo-constants": "~17.0.7",
     "expo-image-picker": "^16.0.5",
     "expo-linear-gradient": "~14.0.2",
     "expo-sensors": "~14.0.2",
+    "expo-sqlite": "~15.1.2",
     "expo-status-bar": "~2.0.1",
     "firebase": "^11.2.0",
+    "native-notify": "^4.0.9",
     "react": "18.3.1",
     "react-native": "0.76.6",
     "react-native-deck-swiper": "^2.0.17",
@@ -40,7 +42,8 @@
     "react-native-screens": "^4.5.0",
     "react-native-vector-icons": "^10.2.0",
     "typescript": "^5.3.3",
-    "expo-sqlite": "~15.1.2"
+    "expo-device": "~7.0.2",
+    "expo-notifications": "~0.29.13"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

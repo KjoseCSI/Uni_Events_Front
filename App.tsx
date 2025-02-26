@@ -3,6 +3,8 @@ import { EventsProvider } from './context/EventsContext';
 import { AuthProvider } from "./context/AuthContext";
 import { SQLiteProvider } from 'expo-sqlite';
 import {createDbIfNeeded} from './database/EventsDatabase';
+import registerNNPushToken from 'native-notify';
+
 
 export default function App() {
   return (

@@ -5,6 +5,16 @@ import { Topbar } from '../../components/Topbar'
 import Searchinput from '../../components/Searchinput'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEventsContext } from "../../hooks/useEventsContext";
+import { Button } from 'react-native-paper'
+
+async function requestUserPermission() {
+  console.log('Requesting permission...');
+  Notification.requestPermission().then((permission) => {
+    if (permission === 'granted') {
+      console.log('Notification permission granted.');
+    }
+  })
+}
 
 export default function MapScreen() {
   return (
@@ -15,6 +25,13 @@ export default function MapScreen() {
           />
       <Topbar/>
       <Searchinput label={'Buscar Evento ...'} />
+        <Button
+        mode="contained-tonal" 
+        buttonColor="#9C9B9B"
+        textColor="white"
+        onPress={requestUserPermission}>
+          Permitir Notificaciones
+        </Button>
       <MapComponentView/>
     </SafeAreaProvider>
   )

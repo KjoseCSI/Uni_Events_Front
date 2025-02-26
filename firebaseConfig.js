@@ -1,20 +1,21 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getMessaging, getToken } from "firebase/messaging";
+
+
 import { API_KEY, AUTH_DOMAIN, 
     PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID,
-    APP_ID, MEASUREMENT_ID
+    APP_ID, MEASUREMENT_ID, CLOUDMESSAGE
  } from "@env";
 import { getAuth } from 'firebase/auth'; 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 import {getReactNativePersistence, iniatializaAuth} from 'firebase/auth';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 import { getFirestore, collection } from "firebase/firestore";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: API_KEY,
     authDomain: AUTH_DOMAIN,
@@ -26,16 +27,22 @@ const firebaseConfig = {
   };
 
 // Initialize Firebase
-const appFirebase = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 /* const analytics = getAnalytics(appFirebase); */
 
 /* export const auth = iniatializaAuth(app,{
-    persistence: getReactNativePersistence()
-}); */
-export const auth = getAuth(appFirebase);
+    persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+});  */
+export const auth = getAuth(app);
 
-export const db = getFirestore(appFirebase);
 
+
+export const db = getFirestore(app);
+
+
+export const messaging = getMessaging(app);
+
+getToken(messaging, {vapidKey: CLOUDMESSAGE});
 
 /* 
 export const usersRef = collection(db,'users');
