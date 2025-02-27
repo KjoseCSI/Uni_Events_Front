@@ -41,15 +41,10 @@ export default function LoginPage() {
     const handleRegister = () => {
         navigation.navigate('RegistrationPage');
     };
-
-
-
     return (
         <View style={styles.container}>
-
             <Image style={styles.icon} source={require('../../assets/icon.png')} />
             <Text style={styles.TitleText}>Bienvenido </Text>
-
             <View style={styles.Card}>
                 <Text style={styles.input}>Ingresa tu correo electrónico institucional:</Text>
 
@@ -91,8 +86,6 @@ export default function LoginPage() {
                         <Text style={styles.link}>Register here</Text>
                     </TouchableOpacity>
                 </Text>
-                <Button title=
-                    "Continuar con google" onPress={() => { }} />
             </View>
         </View>
     );
