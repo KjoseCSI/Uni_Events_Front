@@ -14,7 +14,7 @@ export function useFetchEvents() {
         try {
             const { data } = await axios.get<TopLevel>(url)
             setEvents(data.data)
-            console.log(data.data)
+            /* console.log(data.data) */
         } catch (error) {
             setError(error)
             console.log(error)

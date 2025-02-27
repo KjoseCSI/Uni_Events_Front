@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, Alert, StyleSheet, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; //
+
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../../firebaseConfig";
 import { useAuthContext } from '../../context/AuthContext';
+import { REALTIMEDATABASE } from '@env'
+import { useNotificacion } from '../../hooks/useNotification';
+import { useSQLiteContext } from 'expo-sqlite';
 
 export default function RegistrationPage() {
     const [firstName, setFirstName] = useState('');
@@ -11,10 +14,37 @@ export default function RegistrationPage() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [faculty, setFaculty] = useState('');
-    const navigation = useNavigation(); // 
-
+    const [career, setCareer] = useState('');
     const {logingEmailWithPassword} = useAuthContext();
 
+    const expoPushToken = useNotificacion()
+    const database = useSQLiteContext();
+
+    const loginUser = async () => {
+        try {
+          // Desactivar todos los usuarios
+          await database.execAsync(`UPDATE user SET active = 0;`);
+          // Activar el usuario con el email dado
+          await database.execAsync(`UPDATE user SET active = 1 WHERE email = ${email};`,);
+          console.log(`Usuario con email ${email} ha iniciado sesión y ahora está activo.`);
+        } catch (error) {
+          console.error("Error al iniciar sesión:", error);
+        }
+      };
+
+    const handleSaveUser = async () => {
+        try {
+          const response = await database.runAsync(
+            `INSERT INTO user (firstName, email, faculty, career, active) 
+             VALUES (?, ?, ?, ?, ?);`,
+            [firstName, email, faculty, career, 0] 
+          );
+          console.log("Usuario guardado Correctamente:", response?.changes!);
+        } catch (error) {
+          console.error("Error al guaradar el Usuario:", error);
+        }
+      };
+      
     // validation of complete fields.
     const handleRegistration = async () => {
         const errors = validateInput();
@@ -27,7 +57,21 @@ export default function RegistrationPage() {
             // Crear un nuevo usuario con email y contraseña
             await createUserWithEmailAndPassword(auth, email, password);
             Alert.alert('Registro Exitoso', `Bienvenido ${firstName}!`);
+            handleSaveUser();
+            loginUser();
             logingEmailWithPassword(email,password);
+            await fetch(`${REALTIMEDATABASE}/info.json`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    correo: email,
+                    firstName: firstName,
+                    faculty: faculty,
+                    notificationToken: expoPushToken
+                })
+            })
             } catch (error) {
             console.error(error);
             Alert.alert('Error', error.message); // Muestra un mensaje de error si falla el registro

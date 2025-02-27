@@ -1,26 +1,81 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Alert, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as ImagePicker from 'expo-image-picker';
 import { useAuthContext } from '../../context/AuthContext';
 import { eventsLikeModel } from "../../models/LikeEventsModel";
+import { useSQLiteContext } from "expo-sqlite";
+
+
 export default function UserProfile() {
 
+    const database = useSQLiteContext();
+    
     const [eventLikeData,setEventLikeData] = useState<eventsLikeModel[]>([])
-
+    
     const {showEmail} = useAuthContext();
     // States for user data
-    const [name, setName] = useState<string>('José Chicaiza');
-    const [faculty, setFaculty] = useState<string>('Facultad de Ingeniería');
-    const [career, setCareer] = useState<string>('Carrera de Computación');
+    const [id, setId] = useState(0);
+  const [name, setName] = useState('Nombre');
+  const [email, setEmail] = useState('Correo');
+  const [faculty, setFaculty] = useState('Facultad');
+  const [career, setCareer] = useState('Carrera');
+  const [active, setActive] = useState(0);
     // State to control if the form is in editing mode
     const [isEditing, setIsEditing] = useState<boolean>(false);
     // State to track if changes have been made
     const [hasChanges, setHasChanges] = useState<boolean>(false);
-
+    
     //Create const to chages users image
     const [image, setImage] = useState<string | null>(null);
+    
+    useEffect(() => {
+        const fetchUser = async () => {
+          const userData = await getActiveUserData();
+          if (userData) {
+            // Asignar valores individuales a los estados
+            setId(userData.id);
+            setName(userData.firstName);
+            setEmail(userData.email);
+            setFaculty(userData.faculty);
+            setCareer(userData.career);
+            setActive(userData.active);
+          }
+        };
+        fetchUser();
+      }, []);
+    
+    const getActiveUserData = async () => {
+        
+        try {
+          const result = await database.execAsync(
+            'SELECT * FROM user WHERE active = 1 LIMIT 1;'
+          );
+          const activeUser = result[0]?.rows?._array[0];
+          console.log("Datos del usuario activo:", activeUser);
+          return activeUser;
+        } catch (error) {
+          console.error("Error al obtener datos del usuario:", error);
+          return null;
+        }
+      };
+    
+    const fetchEvents = async () => {
+        try {
+          const results = await database.execAsync('SELECT * FROM eventslike;');
+          const events = results[0]?.rows?._array || [];
+          setEventLikeData(events);
+        } catch (error) {
+          console.error('Error al obtener eventos:', error);
+        }
+      };
+    
+      useEffect(() => {
+        getActiveUserData();
+        fetchEvents();
+      }, []);
+
 
     //choose image from gallery
     const pickImage = async () => {
@@ -64,6 +119,7 @@ export default function UserProfile() {
             ]
         )
     };
+    
  // Function to handle editing
     const handleEdit = () => {
         Alert.alert(

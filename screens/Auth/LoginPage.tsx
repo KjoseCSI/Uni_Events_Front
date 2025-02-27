@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../../firebaseConfig";
 import { useAuthContext } from "../../context/AuthContext";
+import { useSQLiteContext } from 'expo-sqlite';
 
 
 export default function LoginPage() {
@@ -11,7 +12,20 @@ export default function LoginPage() {
     const [password, setPassword] = useState('');
     const navigation = useNavigation(); // 
 
+    const database = useSQLiteContext();
     const {logingEmailWithPassword} = useAuthContext()
+
+    const loginUser = async () => {
+        try {
+          // Desactivar todos los usuarios
+          await database.execAsync(`UPDATE user SET active = 0;`);
+          // Activar el usuario con el email dado
+          await database.execAsync(`UPDATE user SET active = 1 WHERE email = ${email};`,);
+          console.log(`Usuario con email ${email} ha iniciado sesión y ahora está activo.`);
+        } catch (error) {
+          console.error("Error al iniciar sesión:", error);
+        }
+      };
 
     //input parameter validation
     const handleLogin = async () => {
@@ -31,10 +45,11 @@ export default function LoginPage() {
         try {
             await signInWithEmailAndPassword(auth, email, password); // Call to Firebase for verification
             logingEmailWithPassword(email,password);
-          } catch (error) {
+            loginUser();
+        } catch (error) {
             console.error(error);
             Alert.alert('Error usuario o contraseña mal ingresados'); 
-          }
+        }
     }
 
     // Navigate to the Registration page

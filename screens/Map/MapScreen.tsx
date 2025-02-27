@@ -25,13 +25,6 @@ export default function MapScreen() {
           />
       <Topbar/>
       <Searchinput label={'Buscar Evento ...'} />
-        <Button
-        mode="contained-tonal" 
-        buttonColor="#9C9B9B"
-        textColor="white"
-        onPress={requestUserPermission}>
-          Permitir Notificaciones
-        </Button>
       <MapComponentView/>
     </SafeAreaProvider>
   )

@@ -29,7 +29,7 @@ export default function MainEvents() {
     try {
       const response = await database.runAsync(
         `INSERT INTO eventslike (id, event_name, latitude, longitude, event_time, event_date, event_place)
-        VALUES (10, 'Festival de Jazz', -0.2295, -78.5243, '18:30', '2025-04-10', 'Teatro Nacional');`,
+        VALUES (?, ?, ?, ?, ?, ?, ?);`,
           [
             events[currentIndex].id, 
             events[currentIndex].event_name, 
