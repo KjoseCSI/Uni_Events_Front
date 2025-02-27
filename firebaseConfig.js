@@ -40,10 +40,10 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 
 
-export const messaging = getMessaging(app);
+/* export const messaging = getMessaging(app);
 
 getToken(messaging, {vapidKey: CLOUDMESSAGE});
-
+ */
 /* 
 export const usersRef = collection(db,'users');
 export const roomRef = collection(db,'room'); */
