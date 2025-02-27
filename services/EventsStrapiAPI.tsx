@@ -5,8 +5,8 @@ import axios from "axios";
 import { TopLevel,Datum } from "../models/EventsModel";
 
 export function useFetchEvents() {
-    const otherUrl = "http://localhost:1337/api/events?populate[event_photo][fields][0]=url";
-    const url = 'https://orderly-friend-4d1c9cae02.strapiapp.com/api/events?populate[event_photo][fields][0]=url';
+    const url = "https://ingenious-basket-709997b19b.strapiapp.com/api/eventos?populate=*";
+    const otherurl = 'https://ingenious-basket-709997b19b.strapiapp.com/api/eventos?populate[event_photo][fields][0]=url';
     const [events, setEvents] = useState<Datum[]>([])
     const [ error, setError ] = useState(null)
 

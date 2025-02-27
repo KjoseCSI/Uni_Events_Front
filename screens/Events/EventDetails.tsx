@@ -22,15 +22,6 @@ export function EventDetails({ route }: { route: EventDetailRouteProp }) {
   const navigation = useNavigation();
 
 
-  const sendBodyNotification = () => {
-    const title = `Esta a punto de ocurrir: ${events[currentIndex].event_name}` ;
-    const body = `a las ${events[currentIndex].event_time} de ${events[currentIndex].event_date} 
-                se abriran las puertas del evento`;
-    const data = `{ someData: ${events[currentIndex].event_type}}`;
-    NotificationService(title,body,data)
-  }  
-
-
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -58,7 +49,7 @@ export function EventDetails({ route }: { route: EventDetailRouteProp }) {
           colors={['#004771', '#CC0000']}
           style={styles.background}
           />
-      <Image source={{ uri: `${events[currentIndex].event_photo.url}` } } style={styles.photo} />
+      <Image source={{ uri: `${events[currentIndex].event_photo[0].url}` } } style={styles.photo} />
       <View style={styles.footerContainer}>
         <View style={styles.infoContainer}>
           <MaterialIcons name="date-range" size={24} color="white" />
@@ -96,16 +87,12 @@ export function EventDetails({ route }: { route: EventDetailRouteProp }) {
           {events[currentIndex].event_description}
         </Text>
       </View>
-      <Button 
-      icon="share-variant-outline" 
-      mode="contained-tonal" 
-      buttonColor="#9C9B9B"
-      textColor="white"
-      onPress={async () =>{
-        await sendBodyNotification
-        }}>
-        Prueba de Notificacion de este evento
-      </Button>
+      <NotificationService 
+      title={`Esta a punto de ocurrir: ${events[currentIndex].event_name}`}
+       body={`a las ${events[currentIndex].event_time} de ${events[currentIndex].event_date} 
+                se abriran las puertas del evento`} 
+       data={`${events[currentIndex].event_type}`}
+      />
       <Button 
       icon="arrow-left"
       buttonColor="#004771"

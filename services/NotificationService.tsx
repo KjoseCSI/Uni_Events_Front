@@ -13,12 +13,13 @@ Notifications.setNotificationHandler({
 });
 
 async function sendPushNotification(expoPushToken: string, title,body,data) {
+  console.log(title + body + data) 
   const message = {
     to: expoPushToken,
     sound: 'default',
     title: title,
     body: body,
-    data: data,
+    data: { someData: data},
   };
 
   await fetch('https://exp.host/--/api/v2/push/send', {
@@ -79,7 +80,7 @@ async function registerForPushNotificationsAsync() {
   }
 }
 
-export default function NotificationService(title,body,data) {
+export default function NotificationService({title,body,data}) {
     const [expoPushToken, setExpoPushToken] = useState('');
     const [notification, setNotification] = useState<Notifications.Notification | undefined>(
       undefined
@@ -99,7 +100,6 @@ export default function NotificationService(title,body,data) {
       responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
         console.log(response);
       });
-  
       return () => {
         notificationListener.current &&
           Notifications.removeNotificationSubscription(notificationListener.current);
@@ -108,6 +108,12 @@ export default function NotificationService(title,body,data) {
       };
     }, []);
     
-    sendPushNotification(expoPushToken, title,body,data);
-    
+    return (
+        <Button
+          title="Press to Send Notification"
+          onPress={async () => {
+            await sendPushNotification(expoPushToken,title,body,data);
+          }}
+        />
+    );
   }

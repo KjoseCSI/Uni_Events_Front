@@ -5,7 +5,7 @@ export function SwipeableImage({ data: events }) {
 
   return (
     <View>
-        <Image source={{ uri: `${events.event_photo.url}` } } style={styles.photo} />
+        <Image source={{ uri: `${events.event_photo[0].url}` } } style={styles.photo} />
         
         <View style={styles.textContainer}>
           <Text style={[styles.textPrimary, styles.textShadow]}>{events.event_name}
