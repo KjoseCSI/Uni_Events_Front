@@ -60,14 +60,14 @@ function TabsApp() {
                     />
                 )
             }}/>
-            <Tab.Screen 
+            {/* <Tab.Screen 
             name="Notificacion"
             component={NotificationService}
             options={{
                 tabBarIcon: ({focused ,color, size}) =>(
                     <AntDesign name="login" size={24} color="black" />
                 )
-            }}/>
+            }}/> */}
         </Tab.Navigator>
 
     )

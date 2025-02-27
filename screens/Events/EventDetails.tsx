@@ -6,6 +6,7 @@ import { useEventsContext } from "../../hooks/useEventsContext";
 import { RouteProp } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import NotificationService from "../../services/NotificationService";
 
 type RootStackParamList = {
   EventDetail: { currentIndex: number }; 
@@ -19,6 +20,16 @@ export function EventDetails({ route }: { route: EventDetailRouteProp }) {
   const { currentIndex } = route.params;
   const {events, error} = useEventsContext();
   const navigation = useNavigation();
+
+
+  const sendBodyNotification = () => {
+    const title = `Esta a punto de ocurrir: ${events[currentIndex].event_name}` ;
+    const body = `a las ${events[currentIndex].event_time} de ${events[currentIndex].event_date} 
+                se abriran las puertas del evento`;
+    const data = `{ someData: ${events[currentIndex].event_type}}`;
+    NotificationService(title,body,data)
+  }  
+
 
   const onShare = async () => {
     try {
@@ -85,7 +96,16 @@ export function EventDetails({ route }: { route: EventDetailRouteProp }) {
           {events[currentIndex].event_description}
         </Text>
       </View>
-
+      <Button 
+      icon="share-variant-outline" 
+      mode="contained-tonal" 
+      buttonColor="#9C9B9B"
+      textColor="white"
+      onPress={async () =>{
+        await sendBodyNotification
+        }}>
+        Prueba de Notificacion de este evento
+      </Button>
       <Button 
       icon="arrow-left"
       buttonColor="#004771"
