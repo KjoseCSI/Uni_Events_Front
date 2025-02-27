@@ -12,7 +12,11 @@ import { Button } from 'react-native-paper';
 import { useNavigation } from "@react-navigation/native";
 import { useSQLiteContext } from "expo-sqlite";
 
+
 export default function MainEvents() {
+
+  
+
   const { events, error } = useEventsContext(); 
   const [currentIndex, setCurrentIndex] = useState(0)
   const navigation = useNavigation();

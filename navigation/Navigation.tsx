@@ -14,7 +14,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import React from "react";
 import LoginPage from "../screens/Auth/LoginPage";
 import RegistrationPage from "../screens/Auth/RegistrationPage";
-
+import NotificationService from "../services/NotificationService";
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -60,16 +60,14 @@ function TabsApp() {
                     />
                 )
             }}/>
-            {/* <Tab.Screen 
-            name="Perfil"
-            component={RegistrationPage}
+            <Tab.Screen 
+            name="Notificacion"
+            component={NotificationService}
             options={{
                 tabBarIcon: ({focused ,color, size}) =>(
                     <AntDesign name="login" size={24} color="black" />
-                    <AntDesign name="team" size={24} color="white"
-                    />
                 )
-            }}/> */}
+            }}/>
         </Tab.Navigator>
 
     )

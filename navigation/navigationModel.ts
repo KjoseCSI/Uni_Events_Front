@@ -7,6 +7,8 @@ export type RootStackParamList = {
     MapScreen: undefined;
     LoginPage: undefined;
     RegistrationPage: undefined;
+
+    NotificationService: undefined;
   };
 
   
