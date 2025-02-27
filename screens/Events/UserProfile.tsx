@@ -206,12 +206,11 @@ export default function UserProfile() {
                             </Text>
                         ))}
                     </View>
-                    
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Enviar nuevo evento</Text>
-                    </TouchableOpacity>
                 </View>
             </SafeAreaView>
+            <Text style={styles.contactMessage}>
+                    Si deseas agregar un nuevo evento, escríbenos al correo: unievents@uce.edu.ec
+             </Text>
         </SafeAreaView>
     );
 };
@@ -315,6 +314,14 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#fff',
         fontSize: 16,
+    },
+    contactMessage: {
+        color: '#fff', 
+        fontSize: 16, 
+        textAlign: 'center', 
+        marginTop: 10, 
+         marginBottom: 10,
+        paddingHorizontal: 20,
     },
 });
 
