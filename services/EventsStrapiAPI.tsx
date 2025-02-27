@@ -18,7 +18,7 @@ export function useFetchEvents() {
         } catch (error) {
             setError(error)
             console.log(error)
-            Alert.alert('Error getting users', '', [{ text: 'Retry', onPress: () => fetchUser() }])
+            /* Alert.alert('Error getting users', '', [{ text: 'Retry', onPress: () => fetchUser() }]) */
         }
 
     }

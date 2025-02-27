@@ -4,8 +4,10 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Alert, TextInput } fro
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as ImagePicker from 'expo-image-picker';
 import { useAuthContext } from '../../context/AuthContext';
-
+import { eventsLikeModel } from "../../models/LikeEventsModel";
 export default function UserProfile() {
+
+    const [eventLikeData,setEventLikeData] = useState<eventsLikeModel[]>([])
 
     const {showEmail} = useAuthContext();
     // States for user data
@@ -141,9 +143,12 @@ export default function UserProfile() {
                 <View style={styles.subContainer}>
                     <View style={styles.card}>
                         <Text style={styles.cardTitle}>Eventos asistidos</Text>
-                        <Text style={styles.cardText}>☑ Quimicazo</Text>
-                        <Text style={styles.cardText}>☑ Fiestas Quito FEUE</Text>
-                        <Text style={styles.cardText}>☑ Centralazo</Text>
+                        {eventLikeData.map((event) => (
+                            <Text
+                            key={event.id}>
+                                ☑ {event.event_name}
+                            </Text>
+                        ))}
                     </View>
                     
                     <TouchableOpacity style={styles.button}>
