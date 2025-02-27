@@ -80,8 +80,6 @@ export default function LoginPage() {
                         <Text style={styles.link}>Regístrate aquí</Text>
                     </TouchableOpacity>
                 </Text>
-                <Button title=
-                    "Continuar con google" onPress={() => { }} />
             </View>
         </View>
     );
