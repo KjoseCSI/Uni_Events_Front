@@ -8,6 +8,14 @@ import { useAuthContext } from '../../context/AuthContext';
 export default function UserProfile() {
 
     const {showEmail} = useAuthContext();
+    // States for user data
+    const [name, setName] = useState<string>('José Chicaiza');
+    const [faculty, setFaculty] = useState<string>('Facultad de Ingeniería');
+    const [career, setCareer] = useState<string>('Carrera de Computación');
+    // State to control if the form is in editing mode
+    const [isEditing, setIsEditing] = useState<boolean>(false);
+    // State to track if changes have been made
+    const [hasChanges, setHasChanges] = useState<boolean>(false);
 
     //Create const to chages users image
     const [image, setImage] = useState<string | null>(null);
@@ -54,7 +62,47 @@ export default function UserProfile() {
             ]
         )
     };
-
+ // Function to handle editing
+    const handleEdit = () => {
+        Alert.alert(
+            "¿Desea editar sus datos?", "",
+            [{
+                text: "Cancelar",
+                onPress: () => { },
+                style: "cancel"
+            },
+            {
+                text: "OK",
+                onPress: () => {
+                    setIsEditing(true);
+                }
+            }]
+        );
+    };
+    // Function to save changes
+    const handleSave = () => {
+        if (hasChanges) {
+            Alert.alert(
+                "¿Desea guardar los cambios?", "",
+                [{
+                    text: "Cancelar",
+                    onPress: () => { },
+                    style: "cancel"
+                },
+                {
+                    text: "Guardar",
+                    onPress: () => {
+                        setIsEditing(false); // Disable editing mode
+                        setHasChanges(false); // Reset changes flag
+                        Alert.alert("Cambios guardados", "Tu perfil ha sido actualizado.");
+                    }
+                }]
+            );
+        } else {
+            setIsEditing(false); // Disable editing mode
+        }
+    };
+    
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Perfil de usuario</Text>
@@ -66,11 +114,27 @@ export default function UserProfile() {
                 />
                 </TouchableOpacity>
 
-                <Text style={styles.name}>José Chicaiza</Text>
+                <TextInput style={styles.name}
+                    value={name}
+                    onChangeText={(text) => { setName(text); setHasChanges(true); }}
+                    editable={isEditing} />
                 <Text style={styles.email}>{showEmail}</Text>
                 <Text style={styles.boldText}>Estudiante:</Text>
-                <Text style={styles.info}>Facultad de Psicología</Text>
-                <Text style={styles.info}>Carrera de psicopedagogía</Text>
+                <TextInput style={styles.info}
+                    value={faculty}
+                    onChangeText={(text) => { setFaculty(text); setHasChanges(true); }}
+                    editable={isEditing}
+                />
+                <TextInput style={styles.info}
+                    value={career}
+                    onChangeText={(text) => { setCareer(text); setHasChanges(true); }}
+                    editable={isEditing}
+                />
+                <View style={styles.editContainer}>
+                    <TouchableOpacity style={styles.editButton} onPress={isEditing ? handleSave : handleEdit}>
+                        <Text style={styles.editButtonText}>{isEditing ? "Guardar Cambios" : "Editar Perfil"}</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
 
             <SafeAreaView style={styles.subContainer} >
@@ -111,19 +175,35 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     profileImage: {
-        width: 115,
-        height: 115,
-        borderRadius: 50,
+        width: 120,
+        height: 120,
+        borderRadius: 60,
         marginBottom: 20,
         marginLeft: 30,
         marginTop: 20,
     },
+    editContainer: {
+        position: 'absolute',
+        right: 30,
+        top: 20,
+    },
+    editButton: {
+        backgroundColor: '#003366',
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        borderRadius: 6,
+    },
+    editButtonText: {
+        color: '#fff',
+        fontSize: 16,
+    },
+    
     name: {
         fontSize: 22,
         fontWeight: 'bold',
         color: '#fff',
         marginLeft: 30,
-
+        marginTop: -5,
     },
     email: {
         color: '#fff',
